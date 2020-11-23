@@ -11,6 +11,20 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.sass('resources/sass/app.scss', 'public/css')
-    .js('resources/js/app.js', 'public/js').extract();
-mix.version();
+let asset = 'public/assets/';
+let css = asset + '/css';
+let js = asset + '/js';
+
+mix.sass('resources/sass/app.scss', css)
+    .sass('resources/sass/components.scss', css)
+    .sass('resources/sass/front/ui.scss', css)
+    .sass('resources/sass/front/responsive.scss', css)
+    .sass('resources/sass/front/bootstrap.scss', css)
+    .js('resources/js/app.js', js)
+    .js('resources/js/front.js', js)
+    .js('resources/js/bootstrap.js', js)
+    // .extract();
+
+if (mix.inProduction()) {
+    mix.version();
+}
