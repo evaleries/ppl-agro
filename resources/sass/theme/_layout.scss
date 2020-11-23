@@ -54,6 +54,7 @@ body.sidebar-mini {
     }
     .sidebar-brand-sm {
       display: block;
+      height: 60px;
     }
     .sidebar-menu {
       > li {
@@ -355,7 +356,7 @@ body.layout-3 {
     display: inline-block;
     width: 100%;
     text-align: center;
-    height: 60px;
+    height: 120px;
     line-height: 60px;
     &.sidebar-brand-sm {
       display: none;
