@@ -10,16 +10,34 @@
         <form method="POST" action="{{ route('register') }}" class="needs-validation">
             @csrf
 
-            <div class="form-group">
-                <label for="name">{{ __('Name') }}</label>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name">{{ __('First Name') }}</label>
 
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="name" autofocus>
 
-                @error('name')
-                    <div class="invalid-feedback" role="alert">
-                        {{ $message }}
+                        @error('first_name')
+                        <div class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
-                @enderror
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="name">{{ __('Last Name') }}</label>
+
+                        <input id="name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" autocomplete="last_name">
+
+                        @error('last_name')
+                        <div class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </div>
+                        @enderror
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group">
