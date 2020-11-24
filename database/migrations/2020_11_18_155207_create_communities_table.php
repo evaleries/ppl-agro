@@ -15,13 +15,21 @@ class CreateCommunitiesTable extends Migration
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->boolean('is_active')->default(1);
             $table->string('name');
-            $table->string('founder')->nullable();
             $table->string('logo')->nullable();
             $table->text('description')->nullable();
-            $table->timestamp('founded_at')->nullable();
+            $table->string('instagram', 20)->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('whatsapp', 32)->nullable();
+            $table->date('founded_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
