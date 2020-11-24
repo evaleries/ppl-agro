@@ -1,11 +1,13 @@
 <header class="section-header">
 @php
 $dashboardRoute = route('user.orders');
-$role = auth()->user()->role;
-if ($role === 'admin') {
-    $dashboardRoute = route('admin.dashboard');
-} elseif ($role === 'seller') {
-    $dashboardRoute = route('seller.dashboard');
+if (auth()->user()) {
+    $role = auth()->user()->role;
+    if ($role === 'admin') {
+        $dashboardRoute = route('admin.dashboard');
+    } elseif ($role === 'seller') {
+        $dashboardRoute = route('seller.dashboard');
+    }
 }
 @endphp
     <section class="header-main border-bottom">
