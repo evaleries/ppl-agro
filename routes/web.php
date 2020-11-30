@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:user', 'namespace' => 'User', 'prefix' => 'account', 'as' => 'user.'], function () {
         Route::get('orders', 'UserController@orders')->name('orders');
         Route::get('overview', 'UserController@overview')->name('overview');
+        Route::post('cart', 'CartController@store')->name('cart.store');
     });
 });
 
