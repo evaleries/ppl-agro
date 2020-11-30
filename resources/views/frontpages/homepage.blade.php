@@ -27,8 +27,7 @@
                             <span class="text-primary"><i class="fa fa-2x fa-truck"></i></span>
                             <figcaption class="pt-3">
                                 <h5 class="title">Fast delivery</h5>
-                                <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore </p>
+                                <p>Pengiriman antar kota sangat cepat! </p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
                     </div><!-- col // -->
@@ -36,9 +35,8 @@
                         <figure  class="item-feature">
                             <span class="text-primary"><i class="fa fa-2x fa-landmark"></i></span>
                             <figcaption class="pt-3">
-                                <h5 class="title">Creative Strategy</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                </p>
+                                <h5 class="title">Kualitas Terjaga</h5>
+                                <p>Kualitas biji kopi diseleksi secara ketat sehingga membuat cita rasa kopi yang nikmat.</p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
                     </div><!-- col // -->
@@ -47,8 +45,7 @@
                             <span class="text-primary"><i class="fa fa-2x fa-lock"></i></span>
                             <figcaption class="pt-3">
                                 <h5 class="title">High secured </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                </p>
+                                <p>Transaksi pada J.Coffee sangatlah aman dan cepat</p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
                     </div> <!-- col // -->
@@ -71,10 +68,10 @@
             <div class="row">
                 @foreach($latest_products as $product)
                 <div class="col-md-3">
-                    <div href="#" class="card card-product-grid">
-                        <a href="#" class="img-wrap"> @if($product->images->isNotEmpty()) <img src="{{ $product->images->first()->path }}" loading="lazy"> @endif </a>
+                    <div class="card card-product-grid">
+                        <a href="{{ route('product.show', [$product->store, $product]) }}" class="img-wrap"> @if($product->images->isNotEmpty()) <img src="{{ $product->images->first()->image_url }}" loading="lazy"> @endif </a>
                         <figcaption class="info-wrap">
-                            <a href="#" class="title">{{ $product->name }}</a>
+                            <a href="{{ route('product.show', [$product->store, $product]) }}" class="title">{{ $product->name }}</a>
                             @if ($product->ratings->isNotEmpty())
                             <div class="rating-wrap">
                                 <ul class="rating-stars">

@@ -98,7 +98,7 @@ class Product extends Model
 
     public function getRatingAvgAttribute()
     {
-        return $this->ratings->where('is_flagged', 0)->avg('rate');
+        return number_format($this->ratings->where('is_flagged', 0)->avg('rate'), 1);
     }
 
     public function setExtraInfoAttribute($data)
