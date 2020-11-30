@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Community;
 use App\Models\Store;
-use App\Models\User;
 use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
@@ -10,11 +10,11 @@ $factory->define(Store::class, function (Faker $faker) {
         'name' => $faker->name,
         'slug' => $faker->slug,
         'address' => $faker->address,
-        'description' => $faker->text,
-        'image' => $faker->imageUrl(),
+        'image' => 'https://picsum.photos/seed/'. $faker->word .'/300/300',
+        'phone' => '62'. $faker->randomNumber(10),
         'verified_at' => $faker->randomElement([null, now()]),
-        'user_id' => function () {
-            return User::inRandomOrder()->first()->id;
+        'community_id' => function () {
+            return Community::inRandomOrder()->first()->id;
         },
     ];
 });

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property integer $id
@@ -23,10 +25,14 @@ class CommunityEvent extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
+
+    protected $dates = [
+        'started_at', 'ended_at'
+    ];
 
     /**
      * @var array
@@ -44,8 +50,29 @@ class CommunityEvent extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function communityEventAttendees()
+    public function attendees()
     {
         return $this->hasMany('App\Models\CommunityEventAttendee', 'event_id');
     }
+
+    public function setStartedAtAttribute($data)
+    {
+        $this->attributes['started_at'] = Carbon::parse($data)->toDateTimeString();
+    }
+
+    public function setEndedAtAttribute($data)
+    {
+        $this->attributes['ended_at'] = Carbon::parse($data)->toDateTimeString();
+    }
+
+    public function getBannerUrlAttribute()
+    {
+        if (str_starts_with($this->attributes['banner'], 'http')) {
+            return $this->attributes['banner'];
+        }
+
+        return Storage::url($this->attributes['banner']);
+    }
+
+
 }

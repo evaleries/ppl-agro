@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserStoreRequest;
 use App\Http\Requests\Users\UserUpdateRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -77,7 +78,7 @@ class UserController extends Controller
      *
      * @param UserUpdateRequest $request
      * @param User $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UserUpdateRequest $request, User $user)
     {
@@ -103,4 +104,30 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function searchByKeyword(Request $request)
+    {
+        $keyword = $request->post('term');
+        $users = User::query()
+            ->where('first_name', 'LIKE', "%{$keyword}%")
+            ->orWhere('last_name', 'LIKE', "%{$keyword}%")
+            ->orWhere('email', 'LIKE', "%{$keyword}%")
+            ->get();
+
+        if ($users) {
+            return response()->json([
+                'results' => $users->map(function ($user) {
+                    return [
+                        'id' => $user->id,
+                        'text' => $user->full_name
+                    ];
+                })->toArray()
+            ]);
+        }
+
+        return response()->json(['error' => 'Not Found'], 404);
+    }
 }

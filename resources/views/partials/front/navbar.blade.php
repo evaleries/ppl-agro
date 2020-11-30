@@ -12,35 +12,23 @@
                     <a class="nav-link pl-0" data-toggle="dropdown" href="#"><strong> <i class="fa fa-bars"></i> &nbsp
                             All category</strong></a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Foods and Drink</a>
-                        <a class="dropdown-item" href="#">Home interior</a>
+                        <a class="dropdown-item" href="{{route('home')}}">Home</a>
+                        <a class="dropdown-item" href="#">Communities</a>
+                        <a class="dropdown-item" href="#">About Us</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Category 1</a>
-                        <a class="dropdown-item" href="#">Category 2</a>
-                        <a class="dropdown-item" href="#">Category 3</a>
+                        @foreach(\App\Models\ProductCategory::all() as $category)
+                            <a href="#" class="dropdown-item">{{$category->name}}</a>
+                        @endforeach
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Fashion</a>
+                    <a href="{{route('products')}}" class="nav-link"> Semua Produk</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Supermarket</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Electronics</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Baby &amp Toys</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Fitness sport</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Clothing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Furnitures</a>
-                </li>
+                @foreach(\App\Models\ProductCategory::take(5)->get() as $category)
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">{{ $category->name }}</a>
+                    </li>
+                @endforeach
             </ul>
         </div> <!-- collapse .// -->
     </div> <!-- container .// -->

@@ -11,7 +11,7 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h4>{{ $user->first_name }}'s info</h4>
                         </div>
@@ -44,7 +44,7 @@
 
                                 <div class="form-group">
                                     <label for="role">Role</label>
-                                    <select name="role_id" id="role" class="form-control">
+                                    <select name="role_id" id="role" class="form-control select2" multiple>
                                         @foreach ($roles as $id => $role)
                                             <option value="{{$id}}" {{$role === $user->role ? 'selected' : ''}}>{{$role}}</option>
                                         @endforeach
@@ -62,41 +62,15 @@
                             <h4><i class="fa fa-warning"></i> Options</h4>
                         </div>
                         <div class="card-body">
-
                             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <input type="submit" class="btn btn-danger" value="Delete Account">
+                                <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-            @if (!empty($user->store))
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>{{ $user->first_name }}'s store</h4>
-                        </div>
-                        <div class="card-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="store_name">Name</label>
-                                    <input type="text" class="form-control" value="{{ $user->store->name }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="store_name">Slug</label>
-                                    <input type="text" class="form-control" value="{{ $user->store->name }}">
-                                </div>
-                                <img src="{{ $user->store->image }}" alt="{{ $user->store->name }}'s image">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
     </section>
 @endsection

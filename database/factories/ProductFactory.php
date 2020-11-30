@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Store;
 use Faker\Generator as Faker;
 
@@ -17,6 +18,9 @@ $factory->define(Product::class, function (Faker $faker) {
             'weight_name' => 'kg',
         ]),
 
+        'product_category_id' => function () {
+            return ProductCategory::inRandomOrder()->first()->id;
+        },
         'store_id' => function () {
             return Store::inRandomOrder()->first()->id;
         },

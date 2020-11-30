@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property string $deleted_at
  * @property Store $store
- * @property CartItem[] $cartItems
  * @property OrderItem[] $orderItems
  * @property ProductCategory[] $categories
  * @property ProductImage[] $images
@@ -36,7 +35,7 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = ['store_id', 'product_category_id', 'name', 'slug', 'price', 'stock', 'description', 'extra_info', 'created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = ['store_id', 'product_category_id', 'name', 'slug', 'price', 'stock', 'description', 'extra_info', 'created_at', 'updated_at'];
 
     /**
      * @var array
@@ -52,20 +51,17 @@ class Product extends Model
         'extra_info' => 'array'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function store()
     {
         return $this->belongsTo('App\Models\Store');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cartItems()
-    {
-        return $this->hasMany('App\Models\CartItem');
     }
 
     /**
@@ -81,7 +77,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->belongsTo('App\Models\ProductCategory');
+        return $this->belongsTo('App\Models\ProductCategory', 'product_category_id');
     }
 
     /**
@@ -103,5 +99,10 @@ class Product extends Model
     public function getRatingAvgAttribute()
     {
         return $this->ratings->where('is_flagged', 0)->avg('rate');
+    }
+
+    public function setExtraInfoAttribute($data)
+    {
+        $this->attributes['extra_info'] = json_encode($data);
     }
 }

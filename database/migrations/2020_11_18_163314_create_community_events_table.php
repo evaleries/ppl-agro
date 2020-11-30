@@ -16,13 +16,13 @@ class CreateCommunityEventsTable extends Migration
         Schema::create('community_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('community_id');
-            $table->string('name')->nullable();
-            $table->string('banner')->nullable();
+            $table->string('name');
+            $table->string('banner');
             $table->text('description')->nullable();
             $table->string('location')->nullable();
             $table->integer('max_attendees')->default(10000);
-            $table->timestamp('started_at');
-            $table->timestamp('ended_at')->nullable();
+            $table->datetime('started_at');
+            $table->datetime('ended_at');
             $table->timestamps();
 
             $table->foreign('community_id')

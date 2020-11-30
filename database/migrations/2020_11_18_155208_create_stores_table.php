@@ -15,20 +15,19 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('community_id');
             $table->string('name');
             $table->string('slug')->comment('Slug for username');
             $table->string('address');
-            $table->text('description')->nullable();
-            $table->mediumText('image')->nullable();
+            $table->mediumText('image');
+            $table->string('phone', 20)->nullable();
             $table->timestamp('verified_at')->nullable();
 
-            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('community_id')
                 ->references('id')
-                ->on('users')
+                ->on('communities')
                 ->onDelete('cascade');
         });
     }

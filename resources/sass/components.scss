@@ -58,6 +58,15 @@
 // Sweet Alert 2
 @import '~sweetalert2/src/sweetalert2.scss';
 
+// Select 2
+@import '~select2/src/scss/core.scss';
+
+// Summernote
+@import '~summernote/src/styles/summernote-bs4.scss';
+
+// Dropzone
+@import "~dropzone/dist/dropzone";
+
 /* 1.1 Article */
 @import "components/article";
 /* 1.2 Author */

@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $created_at
  * @property string $updated_at
- * @property CommunityRole $communityRole
+ * @property CommunityRole $role
  */
 class CommunityRole extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -26,10 +26,12 @@ class CommunityRole extends Model
      */
     protected $fillable = ['parent_id', 'name', 'created_at', 'updated_at'];
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function communityRole()
+    public function role()
     {
         return $this->belongsTo('App\Models\CommunityRole', 'parent_id');
     }

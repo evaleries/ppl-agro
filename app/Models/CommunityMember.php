@@ -12,16 +12,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $joined_at
  * @property string $created_at
  * @property string $updated_at
- * @property CommunityEventAttendee[] $communityEventAttendees
+ * @property User $user
+ * @property Community $community
+ * @property CommunityRole $role
  */
 class CommunityMember extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
+
+    /**
+     * @var string[]
+     */
+    protected $dates = [
+        'joined_at'
+    ];
 
     /**
      * @var array
@@ -29,10 +38,26 @@ class CommunityMember extends Model
     protected $fillable = ['user_id', 'community_id', 'community_role_id', 'joined_at', 'created_at', 'updated_at'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function communityEventAttendees()
+    public function user()
     {
-        return $this->hasMany('App\Models\CommunityEventAttendee');
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function community()
+    {
+        return $this->belongsTo('App\Models\Community');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo('App\Models\CommunityRole', 'community_role_id');
     }
 }

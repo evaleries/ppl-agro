@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $created_at
  * @property string $updated_at
- * @property CommunityMember $communityMember
- * @property CommunityEvent $communityEvent
+ * @property CommunityMember $member
+ * @property CommunityEvent $event
  */
 class CommunityEventAttendee extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -32,15 +32,15 @@ class CommunityEventAttendee extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function communityMember()
+    public function member()
     {
-        return $this->belongsTo('App\Models\CommunityMember');
+        return $this->belongsTo('App\Models\CommunityMember', 'community_member_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function communityEvent()
+    public function event()
     {
         return $this->belongsTo('App\Models\CommunityEvent', 'event_id');
     }
