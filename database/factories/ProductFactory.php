@@ -13,10 +13,10 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->randomElement([30000, 50000, 750000, 100000, 1500000]),
         'stock' => $faker->randomNumber(),
         'description' => $faker->text,
-        'extra_info' => json_encode([
-            'weight' => 1,
+        'extra_info' => [
+            'weight' => $faker->numberBetween(1, 10),
             'weight_name' => 'kg',
-        ]),
+        ],
 
         'product_category_id' => function () {
             return ProductCategory::inRandomOrder()->first()->id;

@@ -17,7 +17,7 @@ class CreateStoreBalancesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('store_id');
             $table->tinyInteger('type')->default(1);
-            $table->unsignedBigInteger('amount');
+            $table->bigInteger('amount');
             $table->text('description')->nullable();
             $table->timestamps();
 

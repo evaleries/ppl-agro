@@ -11,7 +11,7 @@ $factory->define(Store::class, function (Faker $faker) {
         'slug' => $faker->slug,
         'address' => $faker->address,
         'image' => 'https://picsum.photos/seed/'. $faker->word .'/300/300',
-        'phone' => '62'. $faker->randomNumber(10),
+        'phone' => '62'. $faker->randomNumber(8),
         'verified_at' => $faker->randomElement([null, now()]),
         'community_id' => function () {
             return Community::inRandomOrder()->first()->id;
