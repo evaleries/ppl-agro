@@ -32,6 +32,8 @@
 
     @include('partials.front.header')
 
+    @yield('header')
+
     @yield('content')
 
     @include('partials.front.footer')
@@ -41,6 +43,14 @@
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/front.js') }}" type="text/javascript"></script>
+    <script>
+        $(function() {
+            $('#logoutBtn').on('click', function (e) {
+                e.preventDefault();
+                $('#formLogout').submit();
+            })
+        })
+    </script>
     @stack('javascript')
 
 </body>
