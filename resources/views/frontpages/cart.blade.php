@@ -93,7 +93,7 @@
                                 <span class="text-muted my-2">Belum termasuk shipping</span>
 {{--                                <img src="{{asset('images/misc/payments.png')}}" height="26">--}}
                             </p>
-                            @if (empty($cartems))
+                            @if (empty($cartItems))
                                 <a href="#" class="btn btn-empty-cart btn-block btn-light" disabled> Checkout </a>
                             @else
                                 <a href="#" class="btn btn-block btn-primary"> Checkout </a>
