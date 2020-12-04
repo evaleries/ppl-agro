@@ -3,16 +3,7 @@
 		<section class="footer-top padding-y">
 			<div class="row">
 				<aside class="col-md col-6">
-					<h6 class="title">Brands</h6>
-					<ul class="list-unstyled">
-						<li><a href="#">Adidas</a></li>
-						<li><a href="#">Puma</a></li>
-						<li><a href="#">Reebok</a></li>
-						<li><a href="#">Nike</a></li>
-					</ul>
-				</aside>
-				<aside class="col-md col-6">
-					<h6 class="title">Company</h6>
+					<h6 class="title">{{config('app.name')}}</h6>
 					<ul class="list-unstyled">
 						<li><a href="#">About us</a></li>
 						<li><a href="#">Career</a></li>
@@ -22,22 +13,12 @@
 					</ul>
 				</aside>
 				<aside class="col-md col-6">
-					<h6 class="title">Help</h6>
-					<ul class="list-unstyled">
-						<li><a href="#">Contact us</a></li>
-						<li><a href="#">Money refund</a></li>
-						<li><a href="#">Order status</a></li>
-						<li><a href="#">Shipping info</a></li>
-						<li><a href="#">Open dispute</a></li>
-					</ul>
-				</aside>
-				<aside class="col-md col-6">
 					<h6 class="title">Account</h6>
 					<ul class="list-unstyled">
-						<li><a href="#"> User Login </a></li>
-						<li><a href="#"> User register </a></li>
-						<li><a href="#"> Account Setting </a></li>
-						<li><a href="#"> My Orders </a></li>
+                        <li><a href="{{route('user.overview')}}"> Account Overview </a></li>
+                        <li><a href="{{route('user.orders')}}"> My Orders </a></li>
+                        <li><a href="{{route('login')}}"> User Login </a></li>
+                        <li><a href="{{route('register')}}"> User register </a></li>
 					</ul>
 				</aside>
 				<aside class="col-md">
@@ -53,15 +34,10 @@
 		</section>	<!-- footer-top.// -->
 
 		<section class="footer-bottom border-top row">
-			<div class="col-md-2">
+			<div class="col-md-6">
 				<p class="text-muted"> &copy {{ date('Y') }} {{ config('app.name') }} </p>
 			</div>
-			<div class="col-md-8 text-md-center">
-				<span class="px-2">info@pixsellz.io</span>
-				<span class="px-2">+879-332-9375</span>
-				<span class="px-2">Street name 123, Avanue abc</span>
-			</div>
-			<div class="col-md-2 text-md-right text-muted">
+			<div class="col-md-6 text-md-right text-muted">
 				<i class="fab fa-lg fa-cc-visa"></i>
 				<i class="fab fa-lg fa-cc-paypal"></i>
 				<i class="fab fa-lg fa-cc-mastercard"></i>

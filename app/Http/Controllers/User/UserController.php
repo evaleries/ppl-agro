@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function orders(UserOrderDataTable $dataTable)
+    public function orders()
     {
-        return $dataTable->render('frontpages.account.orders');
+        return view('frontpages.account.orders', [
+            'orders' => Order::where('user_id', auth()->user()->id)->latest()->get()
+        ]);
+    }
+
+    public function overview()
+    {
+        return view('frontpages.account.overview', [
+            'user' => auth()->user()
+        ]);
     }
 }

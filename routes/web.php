@@ -41,11 +41,21 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     // User
-    Route::group(['middleware' => 'role:user', 'namespace' => 'User', 'prefix' => 'account', 'as' => 'user.'], function () {
-        Route::get('orders', 'UserController@orders')->name('orders');
-        Route::get('overview', 'UserController@overview')->name('overview');
-        Route::post('cart', 'CartController@store')->name('cart.store');
+    Route::group(['middleware' => 'role:user'], function () {
+        Route::group(['prefix' => 'account', 'namespace' => 'User', 'as' => 'user.'], function () {
+            Route::get('orders', 'UserController@orders')->name('orders');
+            Route::get('overview', 'UserController@overview')->name('overview');
+        });
+        Route::get('cart', 'CartController@index')->name('cart');
+        Route::post('cart/{product}', 'CartController@addItem')->name('cart.add_item');
+        Route::get('cart/refresh', 'CartController@refresh')->name('cart.refresh');
+        Route::put('cart/quantity', 'CartController@updateItem')->name('cart.update_item');
+        Route::delete('cart', 'CartController@removeItem')->name('cart.delete_item');
     });
+});
+
+Route::get('/ajax/cities/{province}', function ($province) {
+    return response()->json(\Laravolt\Indonesia\Models\Province::with('cities')->where('id', $province)->pluck('name', 'id'));
 });
 
 Route::get('/category/{category}', 'ProductController@category')->name('category');
