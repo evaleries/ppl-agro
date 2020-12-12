@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentBanksTable extends Migration
+class CreatePaymentEWalletTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePaymentBanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_banks', function (Blueprint $table) {
+        Schema::create('payment_ewallet', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('payment_id');
-            $table->string('account_number', 50);
-            $table->string('bank_code', 10);
+            $table->string('phone_number', 20);
+            $table->string('wallet_type', 20);
             $table->timestamps();
 
             $table->foreign('payment_id')
@@ -34,6 +34,6 @@ class CreatePaymentBanksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_banks');
+        Schema::dropIfExists('payment_qris');
     }
 }

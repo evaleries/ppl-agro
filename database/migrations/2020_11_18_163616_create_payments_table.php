@@ -15,19 +15,15 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('payment_method_id');
+            $table->unsignedBigInteger('invoice_id');
+            $table->string('method', 30);
+            $table->string('status', 30);
             $table->unsignedBigInteger('amount');
             $table->timestamps();
 
-            $table->foreign('order_id')
+            $table->foreign('invoice_id')
                 ->references('id')
-                ->on('orders')
-                ->onDelete('cascade');
-
-            $table->foreign('payment_method_id')
-                ->references('id')
-                ->on('payment_methods')
+                ->on('invoices')
                 ->onDelete('cascade');
         });
     }

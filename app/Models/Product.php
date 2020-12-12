@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug
  * @property integer $price
  * @property int $stock
+ * @property int $weight
+ * @property string $weight_unit
  * @property string $description
  * @property mixed $extra_info
  * @property string $created_at
@@ -35,7 +37,7 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = ['store_id', 'product_category_id', 'name', 'slug', 'price', 'stock', 'description', 'extra_info', 'created_at', 'updated_at'];
+    protected $fillable = ['store_id', 'product_category_id', 'name', 'slug', 'price', 'stock', 'weight', 'weight_unit', 'description', 'extra_info', 'created_at', 'updated_at'];
 
     /**
      * @var array

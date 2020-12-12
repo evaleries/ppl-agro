@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
  * @property string $name
  * @property string $slug
  * @property string $address
+ * @property integer $city_id
+ * @property integer $province_id
  * @property string $description
  * @property string $image
  * @property string $verified_at
@@ -21,6 +23,8 @@ use Illuminate\Support\Facades\Storage;
  * @property Community $community
  * @property Invoice[] $invoices
  * @property Product[] $products
+ * @property City $city
+ * @property Province $province
  * @property StoreBalance[] $balances
  */
 class Store extends Model
@@ -35,7 +39,7 @@ class Store extends Model
     /**
      * @var array
      */
-    protected $fillable = ['community_id', 'name', 'slug', 'address', 'phone', 'image', 'verified_at', 'created_at', 'updated_at'];
+    protected $fillable = ['community_id', 'name', 'slug', 'address', 'city_id', 'province_id', 'phone', 'image', 'verified_at', 'created_at', 'updated_at'];
 
     public $dates = [
         'verified_at'
@@ -76,6 +80,22 @@ class Store extends Model
     public function balances()
     {
         return $this->hasMany('App\Models\StoreBalance');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
     }
 
     public function getBalanceAttribute()

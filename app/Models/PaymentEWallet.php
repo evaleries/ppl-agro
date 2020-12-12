@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property integer $payment_id
- * @property string $account_number
- * @property string $bank_code
+ * @property string $phone_number
+ * @property string $wallet_type
  * @property string $created_at
  * @property string $updated_at
  * @property Payment $payment
  */
-class PaymentBank extends Model
+class PaymentEWallet extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
@@ -25,7 +25,7 @@ class PaymentBank extends Model
     /**
      * @var array
      */
-    protected $fillable = ['payment_id', 'account_number', 'bank_code', 'created_at', 'updated_at'];
+    protected $fillable = ['payment_id', 'phone_number', 'wallet_type', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

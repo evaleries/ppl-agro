@@ -11,7 +11,7 @@ $factory->define(OrderItem::class, function (Faker $faker) {
     return [
         'price' => $product->price,
         'product_id' => $product->id,
-
+        'quantity' => $faker->numberBetween(1, 10),
         'order_id' => function () {
             return Order::inRandomOrder()->first()->id;
         },

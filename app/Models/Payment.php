@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property integer $id
- * @property integer $order_id
- * @property integer $payment_method_id
+ * @property integer $invoice_id
+ * @property string $method
+ * @property string $status
  * @property integer $amount
  * @property string $created_at
  * @property string $updated_at
  * @property Order $order
- * @property PaymentMethod $paymentMethod
  * @property PaymentBank[] $paymentBanks
- * @property PaymentQri[] $paymentQris
  */
 class Payment extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -28,37 +26,40 @@ class Payment extends Model
     /**
      * @var array
      */
-    protected $fillable = ['order_id', 'payment_method_id', 'amount', 'created_at', 'updated_at'];
+    protected $fillable = ['invoice_id', 'user_id', 'method', 'amount', 'status', 'created_at', 'updated_at'];
+
+    public const STATUS_PENDING = 'PENDING';
+    public const STATUS_RELEASED = 'RELEASED';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function order()
+    public function user()
     {
-        return $this->belongsTo('App\Models\Order');
+        return $this->belongsTo('App\Models\User');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function paymentMethod()
+    public function invoice()
     {
-        return $this->belongsTo('App\Models\PaymentMethod');
+        return $this->belongsTo('App\Models\Invoice');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function paymentBanks()
+    public function bank()
     {
-        return $this->hasMany('App\Models\PaymentBank');
+        return $this->hasOne('App\Models\PaymentBank');
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function paymentQris()
+    public function ewallet()
     {
-        return $this->hasMany('App\Models\PaymentQri');
+        return $this->hasOne('App\Models\PaymentEWallet');
     }
 }
