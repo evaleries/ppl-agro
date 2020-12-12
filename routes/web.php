@@ -46,17 +46,22 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('orders', 'UserController@orders')->name('orders');
             Route::get('overview', 'UserController@overview')->name('overview');
         });
-        Route::get('cart', 'CartController@index')->name('cart');
-        Route::post('cart/{product}', 'CartController@addItem')->name('cart.add_item');
-        Route::get('cart/refresh', 'CartController@refresh')->name('cart.refresh');
-        Route::put('cart/quantity', 'CartController@updateItem')->name('cart.update_item');
-        Route::delete('cart', 'CartController@removeItem')->name('cart.delete_item');
     });
+
+    Route::get('cart', 'CartController@index')->name('cart');
+    Route::post('cart/{product}', 'CartController@addItem')->name('cart.add_item');
+    Route::get('cart/refresh', 'CartController@refresh')->name('cart.refresh');
+    Route::put('cart/quantity', 'CartController@updateItem')->name('cart.update_item');
+    Route::delete('cart', 'CartController@removeItem')->name('cart.delete_item');
+    Route::get('checkout', 'CheckoutController@index')->name('checkout');
+    Route::post('checkout/process', 'CheckoutController@process')->name('checkout.process');
+    Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
 });
 
-Route::get('/ajax/cities/{province}', function ($province) {
-    return response()->json(\Laravolt\Indonesia\Models\Province::with('cities')->where('id', $province)->pluck('name', 'id'));
-});
+
+Route::get('/ajax/provinces', 'AjaxController@provinces')->name('ajax.provinces');
+Route::get('/ajax/cities/{province}', 'AjaxController@cities')->name('ajax.cities');
+Route::post('/ajax/shipping', 'AjaxController@shippingRate')->name('ajax.shipping');
 
 Route::get('/category/{category}', 'ProductController@category')->name('category');
 Route::get('/products', 'ProductController@index')->name('products');
