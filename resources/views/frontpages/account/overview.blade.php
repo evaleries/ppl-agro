@@ -25,17 +25,15 @@
                                 </span>
                                 <div class="text">
                                     <strong> {{ $user->full_name }} </strong> <br>
-                                    {{ $user->email }} <br>
-                                    <a href="#">Edit</a>
+                                    <p class="pt-4">{{ $user->email }}</p>
                                 </div>
                             </figure>
                             <hr>
                             @if ($user->addresses->isNotEmpty())
                             <p>
-                                <i class="fa fa-map-marker text-muted"></i> &nbsp; My address:
-                                <br>
-                                {{$user->addresses->first()->address }}
-                                <a href="#" class="btn-link"> Edit</a>
+                                <i class="fa fa-map-marker text-muted"></i> Alamat Saya:
+                                @php $address = $user->addresses()->first(); @endphp
+                                {{$address->address}}, {{$address->city->name}}, {{$address->province->name}}, {{$address->phone}}
                             </p>
                             @endif
 
@@ -43,19 +41,13 @@
                                 <figure class="card bg">
                                     <div class="p-3">
                                         <h5 class="card-title">{{$user->orders->count()}}</h5>
-                                        <span>Orders</span>
-                                    </div>
-                                </figure>
-                                <figure class="card bg">
-                                    <div class="p-3">
-                                        <h5 class="card-title">{{$user->addresses->count()}}</h5>
-                                        <span>Addresses</span>
+                                        <span>Pesanan</span>
                                     </div>
                                 </figure>
                                 <figure class="card bg">
                                     <div class="p-3">
                                         <h5 class="card-title">{{$user->communities->count()}}</h5>
-                                        <span>Communities</span>
+                                        <span>Komunitas</span>
                                     </div>
                                 </figure>
                             </article>
@@ -67,7 +59,7 @@
                     @if ($user->orders->isNotEmpty())
                     <article class="card mb-3">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Recent orders </h5>
+                            <h5 class="card-title mb-4">Riwayat Pesanan</h5>
 
                             <div class="row">
                                 @foreach ($user->orders->sortByDesc('created_at') as $order)
@@ -76,9 +68,9 @@
                                         @php $item = $order->items()->first(); @endphp;
                                         <div class="aside"><img src="{{optional($item->product->images()->first())->image_url}}" class="border img-sm"></div>
                                         <figcaption class="info">
-                                            <time class="text-muted"><i class="fa fa-calendar-alt"></i> {{$order->created_at->format('d F Y')}}</time>
-                                            <p>{{$item->name}} </p>
-                                            <span class="text-warning">{{$order->status}}</span>
+                                            <time class="text-muted"><i class="fa fa-calendar-alt"></i> {{$order->created_at->format('d F Y H:i A')}}</time>
+                                            <p><a href="{{route('user.orders')}}">Pesanan #{{$order->id}}</a></p>
+                                            <span class="text-warning">Status: {{$order->status}}</span>
                                         </figcaption>
                                     </figure>
                                 </div> <!-- col.// -->

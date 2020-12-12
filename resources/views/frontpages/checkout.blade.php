@@ -413,6 +413,7 @@
                 });
 
                 if (isReadyToCheckout) {
+                    $(this).attr('disabled', true);
                     $('#checkout').submit();
                 }
             });
