@@ -51,6 +51,16 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="province_id">Provinces</label>
+                                    <select name="province_id" id="province_id" class="form-control select2" required></select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="city_id">City</label>
+                                    <select name="city_id" id="city_id" class="form-control select2" required></select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="phone">Phone/WA</label>
                                     <input type="tel" class="form-control" id="phone" name="phone" value="{{old('phone', $store->phone)}}">
                                     <small class="form-text text-muted">Starting with 62</small>
@@ -71,3 +81,54 @@
         </div>
     </section>
 @endsection
+
+@push('javascript')
+    <script>
+        $(function () {
+            $('#province_id').select2({
+                ajax: {
+                    delay: 500,
+                    type: 'GET',
+                    url: '{{route('ajax.provinces')}}',
+                    dataType: 'json',
+                    processResults: function (data) {
+                        let results = [];
+                        $.each(data.results, function (i, v) {
+                            results.push({
+                                id: i,
+                                text: v
+                            });
+                        });
+
+                        return {
+                            results
+                        }
+                    }
+                }
+            });
+
+            $('#city_id').select2({
+                ajax: {
+                    delay: 500,
+                    type: 'GET',
+                    url: function () {
+                        return '{{url('ajax/cities')}}/' + $('#province_id').val()
+                    },
+                    processResults: function (data) {
+                        let results = [];
+                        $.each(data.results, function (i, v) {
+                            results.push({
+                                id: i,
+                                text: v
+                            });
+                        });
+
+                        return {
+                            results
+                        }
+                    }
+                }
+            })
+        })
+    </script>
+@endpush

@@ -9,7 +9,10 @@
             <nav>
                 <ol class="breadcrumb text-white">
                     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{{url('products')}}">Semua Produk</a></li>
+                    <li class="breadcrumb-item {{request()->has('category') ? '' : 'active'}}" aria-current="page"><a href="{{url('products')}}">Semua Produk</a></li>
+                    @if (request()->has('category') && !empty($category))
+                        <li class="breadcrumb-item active"><a href="{{route('products', ['category' => request()->get('category')])}}">{{$category->name}}</a></li>
+                    @endif
                 </ol>
             </nav>
         </div> <!-- container //  -->
@@ -37,7 +40,7 @@
                                     <ul class="list-menu">
                                         {{-- @TODO: move to the view composers--}}
                                         @foreach(\App\Models\ProductCategory::all() as $category)
-                                        <li class="{{request()->category === $category->id ? 'active' : ''}}"><a href="{{route('products', ['category' => $category->id])}}">{{$category->name}}  </a></li>
+                                        <li><a class="{{request()->get('category') == $category->id ? 'text-primary' : ''}}" href="{{route('products', ['category' => $category->id])}}">{{$category->name}}  </a></li>
                                         @endforeach
                                     </ul>
 
@@ -117,18 +120,6 @@
                 </aside> <!-- col.// -->
                 <main class="col-md-9">
 
-                    <header class="border-bottom mb-4 pb-3">
-                        <div class="form-inline">
-                            <span class="mr-md-auto">Product listing </span>
-                            <select class="mr-2 form-control">
-                                <option>Latest items</option>
-                                <option>Trending</option>
-                                <option>Most Popular</option>
-                                <option>Cheapest</option>
-                            </select>
-                        </div>
-                    </header><!-- sect-heading -->
-
                     <div class="row">
                         @foreach ($products as $product)
                         <div class="col-md-4">
@@ -140,7 +131,8 @@
                                 <figcaption class="info-wrap">
                                     <div class="fix-height">
                                         <a href="{{route('product.show', [$product->store->slug, $product->slug])}}" class="title">{{$product->name}}</a>
-                                        <div class="price-wrap mt-2">
+                                        <small class="text-muted">Toko: {{$product->store->name}}</small>
+                                        <div class="price-wrap mt-1">
                                             <span class="price">@priceIDR($product->price)</span>
                                         </div> <!-- price-wrap.// -->
                                     </div>
@@ -153,7 +145,7 @@
                     </div> <!-- row end.// -->
 
 
-                    <nav class="mt-4" aria-label="Page navigation sample">
+                    <nav class="mt-4" aria-label="Product navigation">
                         {{$products->appends(request()->input())->links()}}
                     </nav>
 

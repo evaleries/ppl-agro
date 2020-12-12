@@ -21,12 +21,12 @@
                                 @csrf
 
                                 <div class="form-group">
-                                    <label for="name">Product Name</label>
+                                    <label for="name">Nama Produk</label>
                                     <input type="text" autocomplete="name" name="name" id="name" placeholder="Product name" class="form-control" value="{{ old('name') }}" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="store_id">Store</label>
+                                    <label for="store_id">Toko</label>
                                     <select name="store_id" id="store_id" class="form-control select2" required>
                                         @foreach($stores as $id => $name)
                                             <option value="{{$id}}" {{old('store_id') === $id ? 'checked' : ''}}>{{$name}}</option>
@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="product_category_id">Category</label>
+                                    <label for="product_category_id">Kategori</label>
                                     <select name="product_category_id" id="product_category_id" class="form-control select2" required>
                                         @foreach($categories as $id => $name)
                                             <option value="{{$id}}" {{old('product_category_id') === $id ? 'selected' : ''}}>{{$name}}</option>
@@ -45,17 +45,31 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-6">
-                                        <label for="address">Price</label>
-                                        <input type="number" name="price" class="form-control" value="{{old('price')}}" required>
+                                        <label for="price">Harga</label>
+                                        <input type="number" name="price" id="price" placeholder="10000" min="0" class="form-control" value="{{old('price')}}" required>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="address">Stock</label>
-                                        <input type="number" min="1" name="stock" class="form-control" value="{{old('stock')}}" required>
+                                        <label for="stock">Stock</label>
+                                        <input type="number" min="1" name="stock" id="stock" placeholder="1" class="form-control" value="{{old('stock')}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="weight">Berat</label>
+                                        <input type="number" name="weight" id="weight" placeholder="Berat dalam angka" class="form-control" value="{{old('weight')}}" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="weight_unit">Satuan Berat</label>
+                                        <select name="weight_unit" id="weight_unit" class="form-control">
+                                            <option value="g" selected>Gram</option>
+                                            <option value="kg">Kilo Gram</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="description">Deskripsi</label>
                                     <textarea name="description" id="description" cols="30" rows="10"
                                               class="form-control summernote">{{old('description')}}</textarea>
                                 </div>
@@ -67,10 +81,10 @@
                                     </span>
                                     <div class="d-flex my-2 extra-info-template">
                                         <div class="col-md-4">
-                                            <input type="text" name="extra_keys[]" placeholder="berat" class="form-control form-control-sm">
+                                            <input type="text" name="extra_keys[]" placeholder="kualitas" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" name="extra_values[]" placeholder="1 kg" class="form-control form-control-sm">
+                                            <input type="text" name="extra_values[]" placeholder="asli" class="form-control form-control-sm">
                                         </div>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-info btn-add-extra-info">Add <i class="fa fa-plus"></i></button>

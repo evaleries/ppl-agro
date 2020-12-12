@@ -41,7 +41,6 @@
     <!-- custom javascript -->
     <script src="{{ asset('js/manifest.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/vendor.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/front.js') }}" type="text/javascript"></script>
     <script>
         $(function() {

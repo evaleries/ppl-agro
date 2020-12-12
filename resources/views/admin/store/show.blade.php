@@ -99,7 +99,7 @@
                     <div class="card-header">
                         <h4>Products <span class="badge badge-primary">{{$store->products->count()}}</span></h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-primary">Add <i class="fa fa-plus"></i></a>
+                            <a href="{{route('admin.products.create')}}" class="btn btn-primary">Add <i class="fa fa-plus"></i></a>
                         </div>
                     </div>
                     <div class="card-body">

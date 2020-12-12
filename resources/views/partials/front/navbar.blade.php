@@ -17,7 +17,7 @@
                         <a class="dropdown-item" href="#">About Us</a>
                         <div class="dropdown-divider"></div>
                         @foreach(\App\Models\ProductCategory::all() as $category)
-                            <a href="#" class="dropdown-item">{{$category->name}}</a>
+                            <a href="{{route('products', ['category' => $category->id])}}" class="dropdown-item">{{$category->name}}</a>
                         @endforeach
                     </div>
                 </li>
@@ -26,7 +26,7 @@
                 </li>
                 @foreach(\App\Models\ProductCategory::take(5)->get() as $category)
                     <li class="nav-item">
-                        <a href="#" class="nav-link">{{ $category->name }}</a>
+                        <a href="{{route('products', ['category' => $category->id])}}" class="nav-link">{{ $category->name }}</a>
                     </li>
                 @endforeach
             </ul>

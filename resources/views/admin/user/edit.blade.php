@@ -44,9 +44,9 @@
 
                                 <div class="form-group">
                                     <label for="role">Role</label>
-                                    <select name="role_id" id="role" class="form-control select2" multiple>
+                                    <select name="role_id[]" id="role" class="form-control select2" multiple>
                                         @foreach ($roles as $id => $role)
-                                            <option value="{{$id}}" {{$role === $user->role ? 'selected' : ''}}>{{$role}}</option>
+                                            <option value="{{$id}}" {{$user->hasAnyRole($id) ? 'selected' : ''}}>{{$role}}</option>
                                         @endforeach
                                     </select>
                                 </div>

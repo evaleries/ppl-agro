@@ -22,7 +22,6 @@ mix.sass('resources/sass/app.scss', css)
     .sass('resources/sass/front/bootstrap.scss', css)
     .js('resources/js/app.js', js)
     .js('resources/js/front.js', js)
-    .js('resources/js/bootstrap.js', js)
     // .extract();
 
 if (mix.inProduction()) {

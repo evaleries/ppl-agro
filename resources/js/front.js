@@ -1,5 +1,5 @@
-require('datatables.net-bs4');
-require('datatables.net-buttons-bs4');
+require('./bootstrap');
+require('select2');
 window.Swal = require('sweetalert2');
 window.Toast = Swal.mixin({
     toast: true,

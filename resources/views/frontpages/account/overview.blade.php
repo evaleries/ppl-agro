@@ -74,7 +74,7 @@
                                 <div class="col-md-6">
                                     <figure class="itemside mb-3">
                                         @php $item = $order->items()->first(); @endphp;
-                                        <div class="aside"><img src="{{optional($item->images()->first())->image_url}}" class="border img-sm"></div>
+                                        <div class="aside"><img src="{{optional($item->product->images()->first())->image_url}}" class="border img-sm"></div>
                                         <figcaption class="info">
                                             <time class="text-muted"><i class="fa fa-calendar-alt"></i> {{$order->created_at->format('d F Y')}}</time>
                                             <p>{{$item->name}} </p>

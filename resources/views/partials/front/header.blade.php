@@ -20,9 +20,9 @@ if (auth()->user()) {
                     </a> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                    <form action="#" class="search">
+                    <form action="{{route('products')}}" class="search">
                         <div class="input-group w-100">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" name="q" class="form-control" placeholder="Search">
                             <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fa fa-search"></i> Search
@@ -35,7 +35,6 @@ if (auth()->user()) {
                     <div class="widgets-wrap float-md-right">
                         <div class="widget-header  mr-3">
                             <a href="{{route('cart')}}" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
-                            <span class="badge badge-pill badge-danger notify">0</span>
                         </div>
                         <div class="widget-header icontext">
                             <a href="{{ $dashboardRoute }}" class="icon icon-sm rounded-circle border"><i class="fa fa-fire"></i></a>

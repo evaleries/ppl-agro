@@ -63,6 +63,7 @@
                                     <span class="form-text text-muted">
                                         Informasi tambahan
                                     </span>
+				    @if ($product->extra_info)
                                     @foreach ($product->extra_info as $key => $val)
                                         @if (empty($key) && empty($val)) @continue @endif
                                         <div class="d-flex my-2">
@@ -78,6 +79,7 @@
                                             </div>
                                         </div>
                                     @endforeach
+				    @endif
                                     <div class="d-flex my-2 extra-info-template">
                                         <div class="col-md-4">
                                             <input type="text" name="extra_keys[]" placeholder="berat" class="form-control form-control-sm">
