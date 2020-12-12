@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'last_name' => 'J.Coffee',
             'password' => app('hash')->make('123'),
             'email' => 'admin@jcoffee.test'
-        ])->assignRole('admin');
+        ])->assignRole(['admin', 'seller', 'user']);
 
         factory(User::class, 49)->create()->each(function ($u) {
             $u->assignRole('user');
