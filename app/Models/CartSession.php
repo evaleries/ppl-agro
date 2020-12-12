@@ -12,6 +12,11 @@ class CartSession
 {
     public $sessionName = 'cart';
 
+    /**
+     * Max Weight in Kg
+     */
+    public const MAXIMUM_WEIGHT_PER_STORE = 30.0 * 1000;
+
     /** @var Collection */
     protected $items;
 
@@ -48,9 +53,9 @@ class CartSession
     public function add(Product $product, $quantity)
     {
         if ($index = $this->findKey($product->id)) {
-            $this->update($product, $quantity);
+            $this->update($product, $this->items->get($index)['quantity'] + $quantity);
         } else {
-            $this->items->push(['product' => $product, 'product_id' => $product->id, 'quantity' => $quantity, 'price' => $product->price, 'total_price' => $product->price * $quantity]);
+            $this->items->push(['product' => $product, 'store_id' => $product->store_id, 'product_id' => $product->id, 'quantity' => $quantity, 'price' => $product->price, 'total_price' => $product->price * $quantity]);
         }
 
         $this->save();
@@ -92,6 +97,33 @@ class CartSession
         return $this->items->search(function ($item) use ($productId) {
             return $item['product_id'] === $productId;
         });
+    }
+
+    public function stores()
+    {
+        return $this->items->unique('store_id');
+    }
+
+    public function groupByStore()
+    {
+        return $this->items->groupBy('store_id');
+    }
+
+    public function allStores()
+    {
+        return $this->stores()->map(function ($item) {
+            return (object) $item;
+        })->toArray();
+    }
+
+    public function totalStores()
+    {
+        return $this->stores()->count();
+    }
+
+    public function items()
+    {
+        return $this->items;
     }
 
     public function all()
@@ -138,4 +170,55 @@ class CartSession
         return 'Rp. '.number_format($number, 0, ',','.');
     }
 
+    protected function calculateWeight($items)
+    {
+        return $items->reduce(function ($carry, $item) {
+            $item = (object) $item;
+            if ($item->product->weight_unit === 'kg') {
+                $carry += $item->product->weight * 1000 * $item->quantity;
+            } elseif ($item->product->weigh_unit === 'g') {
+                $carry += $item->product->weight * $item->quantity;
+            }
+            return $carry;
+        }, 0);
+    }
+
+    public function weightFromStore($store_id)
+    {
+        return $this->calculateWeight($this->items->where('store_id', $store_id));
+    }
+
+    public function totalWeight()
+    {
+        return $this->calculateWeight($this->items);
+    }
+
+    public function hasOverWeightItems()
+    {
+        foreach ($this->items as $item) {
+            if ($this->weightFromStore($item['store_id']) >= self::MAXIMUM_WEIGHT_PER_STORE) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function totalWeightStr($weight = null)
+    {
+        $totalWeight = $weight ?: $this->totalWeight();
+
+        if ($totalWeight >= 1000) {
+            $weightInKg = number_format($totalWeight / 1000, 1);
+            return $weightInKg.' kg';
+        }
+
+        return $totalWeight.' gram';
+    }
+
+    public function clear()
+    {
+        $this->items = collect([]);
+        session()->forget($this->sessionName);
+    }
 }
