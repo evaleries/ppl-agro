@@ -27,6 +27,8 @@ class PaymentEWallet extends Model
      */
     protected $fillable = ['payment_id', 'phone_number', 'wallet_type', 'created_at', 'updated_at'];
 
+    protected $table = 'payment_ewallet';
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

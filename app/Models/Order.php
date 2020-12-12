@@ -31,7 +31,7 @@ class Order extends Model
 
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_COMPLETED = 'COMPLETED';
-    public const STATUS_SHIPPED = 'SHIPPED';
+    public const STATUS_ON_DELIVERY = 'OTW';
     public const STATUS_CANCELLED = 'CANCELLED';
 
     /**
@@ -48,11 +48,11 @@ class Order extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function invoices()
+    public function invoice()
     {
-        return $this->hasMany('App\Models\Invoice');
+        return $this->HasOne('App\Models\Invoice');
     }
 
     /**
@@ -61,14 +61,6 @@ class Order extends Model
     public function items()
     {
         return $this->hasMany('App\Models\OrderItem');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function payments()
-    {
-        return $this->hasMany('App\Models\Payment');
     }
 
     /**
@@ -84,8 +76,18 @@ class Order extends Model
         return $this->belongsTo('App\Models\Store');
     }
 
+    public function getTotalAttribute()
+    {
+        return $this->items->sum('price');
+    }
+
     public function getTotalAmountAttribute()
     {
-        return $this->items->sum('price') + ($this->attributes['shipping_cost'] ?? 0);
+        return $this->items->sum('price') + ($this->attributes['shipping_cost'] ?? 0) + $this->getPpnAttribute();
+    }
+
+    public function getPpnAttribute()
+    {
+        return $this->items->sum('price') * 0.1;
     }
 }

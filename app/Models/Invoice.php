@@ -45,4 +45,11 @@ class Invoice extends Model
         return $this->belongsTo('App\Models\Order');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
 }

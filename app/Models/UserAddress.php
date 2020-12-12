@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\Province;
 
 /**
  * @property integer $id
