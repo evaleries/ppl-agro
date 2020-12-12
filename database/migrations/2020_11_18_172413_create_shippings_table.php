@@ -16,9 +16,14 @@ class CreateShippingsTable extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
+            $table->char('sender_city');
+            $table->char('receiver_city');
             $table->unsignedBigInteger('user_address_id');
-            $table->unsignedBigInteger('shipper_id');
-            $table->string('tracking_code');
+            $table->string('shipper', 100)->nullable();
+            $table->string('service', 100)->nullable();
+            $table->string('estimated_delivery', 30)->nullable();
+            $table->unsignedDecimal('weight');
+            $table->string('tracking_code')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
 
@@ -32,10 +37,13 @@ class CreateShippingsTable extends Migration
                 ->on('user_addresses')
                 ->onDelete('cascade');
 
-            $table->foreign('shipper_id')
+            $table->foreign('sender_city')
                 ->references('id')
-                ->on('shippers')
-                ->onDelete('cascade');
+                ->on('indonesia_cities');
+
+            $table->foreign('receiver_city')
+                ->references('id')
+                ->on('indonesia_cities');
         });
     }
 

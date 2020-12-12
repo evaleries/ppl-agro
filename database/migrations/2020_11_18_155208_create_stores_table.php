@@ -19,6 +19,8 @@ class CreateStoresTable extends Migration
             $table->string('name');
             $table->string('slug')->comment('Slug for username');
             $table->string('address');
+            $table->char('city_id', 4);
+            $table->char('province_id', 2);
             $table->mediumText('image');
             $table->string('phone', 20)->nullable();
             $table->timestamp('verified_at')->nullable();
@@ -29,6 +31,14 @@ class CreateStoresTable extends Migration
                 ->references('id')
                 ->on('communities')
                 ->onDelete('cascade');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('indonesia_cities');
+
+            $table->foreign('province_id')
+                ->references('id')
+                ->on('indonesia_provinces');
         });
     }
 

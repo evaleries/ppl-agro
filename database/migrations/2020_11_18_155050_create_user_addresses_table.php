@@ -18,8 +18,8 @@ class CreateUserAddressesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name')->default('Home');
             $table->string('address');
-            $table->string('city')->nullable();
-            $table->string('province')->nullable();
+            $table->char('city_id', 4);
+            $table->char('province_id', 2);
             $table->string('zipcode', 12);
             $table->string('phone', 15);
             $table->timestamps();
@@ -28,6 +28,14 @@ class CreateUserAddressesTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('indonesia_cities');
+
+            $table->foreign('province_id')
+                ->references('id')
+                ->on('indonesia_provinces');
         });
     }
 

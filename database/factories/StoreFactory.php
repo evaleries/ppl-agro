@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(Store::class, function (Faker $faker) {
+    $city = \App\Models\City::inRandomOrder()->first();
     return [
         'name' => $faker->name,
         'slug' => $faker->slug,
@@ -16,5 +17,11 @@ $factory->define(Store::class, function (Faker $faker) {
         'community_id' => function () {
             return Community::inRandomOrder()->first()->id;
         },
+        'city_id' => function () use($city) {
+            return $city->id;
+        },
+        'province_id' => function () use ($city) {
+            return $city->province->id;
+        }
     ];
 });

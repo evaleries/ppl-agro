@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\Province;
 
 /**
  * @property integer $id
  * @property integer $user_id
  * @property string $name
  * @property string $address
- * @property string $city
- * @property string $province
+ * @property integer $city_id
+ * @property integer $province_id
  * @property string $zipcode
  * @property string $phone
  * @property string $created_at
@@ -22,7 +24,7 @@ class UserAddress extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -30,7 +32,7 @@ class UserAddress extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_id', 'name', 'address', 'city', 'province', 'zipcode', 'phone', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'name', 'address', 'city_id', 'province_id', 'zipcode', 'phone', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -46,5 +48,21 @@ class UserAddress extends Model
     public function shippings()
     {
         return $this->hasMany('App\Models\Shipping');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
     }
 }
