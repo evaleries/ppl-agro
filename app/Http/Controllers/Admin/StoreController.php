@@ -8,8 +8,6 @@ use App\Http\Requests\Stores\StoreStoreRequest;
 use App\Http\Requests\Stores\StoreUpdateRequest;
 use App\Models\Community;
 use App\Models\Store;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 

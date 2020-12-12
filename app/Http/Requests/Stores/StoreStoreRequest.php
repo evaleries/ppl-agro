@@ -27,6 +27,8 @@ class StoreStoreRequest extends FormRequest
             'community_id' => ['required', 'numeric', 'exists:communities,id'],
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
+            'city_id' => ['required', 'numeric', 'exists:indonesia_cities,id'],
+            'province_id' => ['required', 'numeric', 'exists:indonesia_provinces,id'],
             'store_image' => ['required', 'image'],
             'phone' => ['required', 'starts_with:62'],
             'verified_at' => ['nullable', 'date_format:Y-m-d\TH:i']

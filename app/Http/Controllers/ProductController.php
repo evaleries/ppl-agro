@@ -16,6 +16,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::with(['store', 'ratings']);
+        $header = 'Semua Produk';
+        $category = null;
+
+        $products->when($request->has('q'), function ($q) use ($request) {
+            return $q->where('name', 'like', '%'.$request->get('q').'%')
+                ->orWhere('description', $request->get('name'));
+        });
 
         $products->when($request->has('price_min') && $request->has('price_max'), function ($q) use ($request) {
             return $q->orWhereBetween('price', [
@@ -24,7 +31,9 @@ class ProductController extends Controller
             ]);
         });
 
-        $products->when($request->has('category'), function ($q) use ($request) {
+        $products->when($request->has('category'), function ($q) use ($request, &$header, &$category) {
+            $category = ProductCategory::findOrFail($request->get('category'));
+            $header = 'Kategori Produk: '. $category->name;
             return $q->orWhere('product_category_id', $request->get('category'));
         });
 
@@ -35,7 +44,7 @@ class ProductController extends Controller
         });
 
         $products = $products->paginate(6);
-        return view('frontpages.products', compact('products'));
+        return view('frontpages.products', compact('products', 'header', 'category'));
     }
 
     public function category($id)

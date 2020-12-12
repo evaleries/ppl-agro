@@ -31,6 +31,8 @@ class ProductStoreRequest extends FormRequest
             'product_category_id' => ['required', 'numeric', 'exists:product_categories,id'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'numeric'],
+            'weight' => ['required', 'numeric'],
+            'weight_unit' => ['required', 'in:kg,g'],
             'description' => ['nullable', 'string'],
             'extra_keys' => ['required_with:extra_values', 'nullable', 'array'],
             'extra_values' => ['required_with:extra_keys', 'nullable', 'array'],

@@ -24,6 +24,7 @@ class CartController extends Controller
     {
         if ($request->has('product')) {
             $this->cart->add(Product::findOrFail($request->get('product')), $request->get('quantity', 1));
+            return redirect()->route('cart');
         }
 
         return view('frontpages.cart', [

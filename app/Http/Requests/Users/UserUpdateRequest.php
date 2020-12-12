@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
             'last_name' => ['string', 'max:255', 'nullable'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['nullable', 'string', 'min:8'],
-            'role_id' => ['required', 'numeric'],
+            'role_id' => ['required', 'array'],
         ];
     }
 
