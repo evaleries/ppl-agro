@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:user'], function () {
         Route::group(['prefix' => 'account', 'namespace' => 'User', 'as' => 'user.'], function () {
             Route::get('orders', 'UserController@orders')->name('orders');
+            Route::get('orders/{order}', 'UserController@show')->name('orders.show');
             Route::get('overview', 'UserController@overview')->name('overview');
         });
     });
@@ -57,7 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('checkout/process', 'CheckoutController@process')->name('checkout.process');
     Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
 });
-
 
 Route::get('/ajax/provinces', 'AjaxController@provinces')->name('ajax.provinces');
 Route::get('/ajax/cities/{province}', 'AjaxController@cities')->name('ajax.cities');

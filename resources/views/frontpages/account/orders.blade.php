@@ -44,10 +44,7 @@
                                     <td>{{$order->status}}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td width="250">
-                                        @if ($order->status == 'Shipped')
-                                        <a href="#" class="btn btn-outline-primary">Track order</a>
-                                        @endif
-                                        <a href="#" class="btn btn-light"> Detail </a>
+                                        <a href="{{route('user.orders.show', $order->id)}}" class="btn btn-light"> Detail <i class="fa fa-eye"></i> </a>
                                     </td>
                                 </tr>
                                 @endforeach

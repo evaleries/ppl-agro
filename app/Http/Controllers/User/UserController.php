@@ -16,6 +16,15 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @param Order $order
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Order $order)
+    {
+        return view('frontpages.account.order_detail', compact('order'));
+    }
+
     public function overview()
     {
         return view('frontpages.account.overview', [
