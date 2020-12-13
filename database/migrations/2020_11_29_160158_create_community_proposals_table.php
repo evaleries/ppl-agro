@@ -16,12 +16,13 @@ class CreateCommunityProposalsTable extends Migration
         Schema::create('community_proposals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('name', 255);
-            $table->text('description')->nullable();
+            $table->string('name');
+            $table->text('description');
             $table->string('banner');
-            $table->string('reject_reason');
-            $table->dateTime('approved_at');
-            $table->dateTime('rejected_at');
+            $table->string('ktp');
+            $table->text('reject_reason')->nullable();
+            $table->dateTime('approved_at')->nullable();
+            $table->dateTime('rejected_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
