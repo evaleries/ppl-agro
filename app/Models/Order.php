@@ -30,6 +30,7 @@ class Order extends Model
     protected $keyType = 'integer';
 
     public const STATUS_PENDING = 'PENDING';
+    public const STATUS_PROCESSING = 'PROCESSING';
     public const STATUS_COMPLETED = 'COMPLETED';
     public const STATUS_ON_DELIVERY = 'OTW';
     public const STATUS_CANCELLED = 'CANCELLED';

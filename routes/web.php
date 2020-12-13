@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('products/{id}/images', 'ProductController@addImage')->name('products.add_image');
         Route::post('products/{id}/images', 'ProductController@uploadImage')->name('products.upload_image');
         Route::delete('products/{id}/images', 'ProductController@deleteImage')->name('products.delete_image');
+        Route::resource('payments', 'PaymentController')->only(['index', 'show', 'update']);
     });
 
     // Seller

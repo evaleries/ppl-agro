@@ -29,6 +29,7 @@ class Payment extends Model
     protected $fillable = ['invoice_id', 'user_id', 'method', 'amount', 'status', 'created_at', 'updated_at'];
 
     public const STATUS_PENDING = 'PENDING';
+    public const STATUS_CANCELLED = 'CANCELLED';
     public const STATUS_RELEASED = 'RELEASED';
 
     /**

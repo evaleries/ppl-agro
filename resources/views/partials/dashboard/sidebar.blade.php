@@ -46,8 +46,8 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
             <li class="{{request()->routeIs('admin.products.index') ? 'active' : ''}}">
                 <a href="{{route('admin.products.index')}}" class="nav-link"><i class="fas fa-box"></i> <span>Products</span></a>
             </li>
-            <li>
-                <a href="#" class="nav-link"><i class="fas fa-comment-dots"></i> <span>Reviews</span></a>
+            <li class="{{request()->routeIs('admin.payments.index') ? 'active' : ''}}">
+                <a href="{{route('admin.payments.index')}}" class="nav-link"><i class="fas fa-money-bill-wave"></i> <span>Payments</span></a>
             </li>
         @endcan
     </ul>
