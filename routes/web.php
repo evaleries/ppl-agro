@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('events', 'CommunityEventController');
         Route::post('events/attendee/add', 'CommunityEventController@addAttendee')->name('events.add_attendee');
         Route::delete('events/attendee/remove', 'CommunityEventController@removeAttendee')->name('events.remove_attendee');
+        Route::resource('proposals', 'CommunityProposalController')->except(['create', 'store']);
 
         Route::resource('stores', 'StoreController');
         Route::resource('products', 'ProductController');
@@ -46,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('orders', 'UserController@orders')->name('orders');
             Route::get('orders/{order}', 'UserController@show')->name('orders.show');
             Route::get('overview', 'UserController@overview')->name('overview');
+            Route::get('community/propose', 'UserController@propose')->name('community.propose');
+            Route::post('community', 'UserController@storeProposal')->name('community.propose.store');
         });
     });
 
