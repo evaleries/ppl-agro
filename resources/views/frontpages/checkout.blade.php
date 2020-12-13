@@ -152,6 +152,9 @@
                                                 <option value="bca" {{old('bank') === 'bca' ? 'selected' : ''}}>BCA</option>
                                                 <option value="bri" {{old('bank') === 'bri' ? 'selected' : ''}}>BRI</option>
                                                 <option value="bni" {{old('bank') === 'bni' ? 'selected' : ''}}>BNI</option>
+                                                <option value="mandiri" {{old('bank') === 'mandiri' ? 'selected' : ''}}>MANDIRI</option>
+                                                <option value="cimb" {{old('bank') === 'cimb' ? 'selected' : ''}}>CIMB NIAGA</option>
+                                                <option value="jatim" {{old('bank') === 'jatim' ? 'selected' : ''}}>Bank JATIM</option>
                                             </select>
                                         </div>
                                     </div>
