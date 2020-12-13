@@ -7,6 +7,9 @@
         @if (!auth()->user()->hasRole('seller'))
         <a href="{{route('user.community.propose')}}" class="list-group-item"> Ajukan Komunitas </a>
         @endif
+        @if (auth()->user()->hasRole('seller'))
+            <a href="{{route('seller.dashboard')}}" class="list-group-item"> Seller Dashboard </a>
+        @endif
     </ul>
     <br>
     <a class="btn btn-light btn-block" href="#" id="logoutBtn"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a>
