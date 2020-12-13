@@ -49,7 +49,7 @@ class UserController extends Controller
         }
 
         if ($request->hasFile('ktp_file')) {
-            $validated['ktp'] = $request->file('ktp_file')->store('ktps');
+            $validated['ktp'] = $request->file('ktp_file')->store('public/ktps');
         }
 
         $validated['user_id'] = $request->user()->id;

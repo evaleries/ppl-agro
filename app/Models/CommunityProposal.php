@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property integer $id
@@ -32,11 +33,33 @@ class CommunityProposal extends Model
      */
     protected $fillable = ['user_id', 'name', 'description', 'banner', 'ktp', 'reject_reason', 'approved_at', 'rejected_at', 'created_at', 'updated_at'];
 
+    public $dates = [
+        'approved_at', 'rejected_at', 'created_at', 'updated_at'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function getBannerUrlAttribute()
+    {
+        if ($this->attributes['banner'] && Storage::exists($this->attributes['banner'])) {
+            return Storage::url($this->attributes['banner']);
+        }
+
+        return null;
+    }
+
+    public function getKtpUrlAttribute()
+    {
+        if ($this->attributes['ktp'] && Storage::exists($this->attributes['ktp'])) {
+            return Storage::url($this->attributes['ktp']);
+        }
+
+        return null;
     }
 }

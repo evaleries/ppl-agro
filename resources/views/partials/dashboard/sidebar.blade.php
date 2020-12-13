@@ -33,8 +33,8 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
             <li class="{{ request()->routeIs('admin.events.index') ? 'active' : '' }}">
                 <a href="{{route('admin.events.index')}}" class="nav-link"><i class="fas fa-calendar-week"></i> <span>Events</span></a>
             </li>
-            <li>
-                <a href="#" class="nav-link"><i class="fas fa-check"></i> <span>Community Proposals</span></a>
+            <li class="{{ request()->routeIs('admin.proposals.index') ? 'active' : '' }}">
+                <a href="{{route('admin.proposals.index')}}" class="nav-link"><i class="fas fa-check"></i> <span>Community Proposals</span></a>
             </li>
         @endcan
 
