@@ -60,7 +60,7 @@ class CommunityProposalController extends Controller
         if ($request->action === 'accept') {
             $proposal->user->assignRole('seller');
             $proposal->update([
-                'approved_at' => now(),ar
+                'approved_at' => now(),
             ]);
             Community::where('user_id', $proposal->user->id)->firstOr(function () use ($proposal) {
                 return Community::create([
