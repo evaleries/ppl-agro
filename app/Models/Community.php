@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 /**
  * @property integer $id
  * @property boolean $is_active
+ * @property integer $user_id
  * @property string $name
  * @property string $founder
  * @property string $logo

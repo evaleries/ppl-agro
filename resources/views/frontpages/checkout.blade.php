@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="form-group col-sm-12">
                                     <label for="shipping_name">Nama Penerima</label>
-                                    <input type="text" class="form-control" name="shipping_name" value="{{old('shipping_name', auth()->user()->full_name)}}" required>
+                                    <input type="text" class="form-control" name="shipping_name" value="{{old('shipping_name', $address->name ?? auth()->user()->full_name)}}" required>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="shipping_province_id">Provinsi*</label>
@@ -78,15 +78,15 @@
                                 </div>
                                 <div class="form-group col-sm-8">
                                     <label for="shipping_address">Alamat Rumah</label>
-                                    <input type="text" name="shipping_address" id="shipping_address" value="{{old('shipping_address')}}" placeholder="Jl." class="form-control" required>
+                                    <input type="text" name="shipping_address" id="shipping_address" value="{{old('shipping_address', $address->address ?? '')}}" placeholder="Jl." class="form-control" required>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label for="shipping_zipcode">Kode Pos</label>
-                                    <input type="text" name="shipping_zipcode" id="shipping_zipcode" class="form-control" value="{{old('shipping_zipcode')}}" required>
+                                    <input type="text" name="shipping_zipcode" id="shipping_zipcode" class="form-control" value="{{old('shipping_zipcode', $address->zipcode ?? '')}}" required>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label for="shipping_phone">Nomor HP</label>
-                                    <input type="text" name="shipping_phone" id="shipping_phone" value="{{old('shipping_phone')}}" placeholder="62" class="form-control" required>
+                                    <input type="text" name="shipping_phone" id="shipping_phone" value="{{old('shipping_phone', $address->phone ?? '')}}" placeholder="62" class="form-control" required>
                                 </div>
                             </div> <!-- row.// -->
                         </div> <!-- card-body.// -->

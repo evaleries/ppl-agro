@@ -39,6 +39,7 @@ class CheckoutController extends Controller
         }
 
         return view('frontpages.checkout', [
+            'address' => auth()->user()->addresses()->first(),
             'cart' => $this->cart,
             'cartItems' => $this->cart->all(),
             'grandTotal' => $this->cart->grandTotal(),

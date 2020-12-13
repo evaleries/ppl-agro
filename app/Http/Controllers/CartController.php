@@ -38,6 +38,7 @@ class CartController extends Controller
     /**
      * @param Request $request
      * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function addItem(Request $request, Product $product)
     {

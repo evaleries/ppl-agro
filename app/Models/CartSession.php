@@ -52,13 +52,13 @@ class CartSession
      */
     public function add(Product $product, $quantity)
     {
-        if ($index = $this->findKey($product->id)) {
-            $this->update($product, $this->items->get($index)['quantity'] + $quantity);
+        $index = $this->findKey($product->id);
+        if ($index !== null) {
+            $this->update($product, ($this->items->get($index)['quantity'] ?? 0) + $quantity);
         } else {
             $this->items->push(['product' => $product, 'store_id' => $product->store_id, 'product_id' => $product->id, 'quantity' => $quantity, 'price' => $product->price, 'total_price' => $product->price * $quantity]);
+            $this->save();
         }
-
-        $this->save();
 
         return $this;
     }
@@ -73,6 +73,8 @@ class CartSession
             $this->items = $this->items->replace([$index => $exProduct]);
             $this->save();
         }
+
+        return $this;
     }
 
     public function remove($productId)
@@ -196,7 +198,7 @@ class CartSession
     public function hasOverWeightItems()
     {
         foreach ($this->items as $item) {
-            if ($this->weightFromStore($item['store_id']) >= self::MAXIMUM_WEIGHT_PER_STORE) {
+            if ($this->weightFromStore($item['store_id']) > self::MAXIMUM_WEIGHT_PER_STORE) {
                 return true;
             }
         }
