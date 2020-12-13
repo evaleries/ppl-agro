@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Community', 'community_members');
     }
 
+    public function community()
+    {
+        return $this->belongsTo('App\Models\Community');
+    }
+
     public function getFullNameAttribute()
     {
         if (empty($this->attributes['last_name'])) {
