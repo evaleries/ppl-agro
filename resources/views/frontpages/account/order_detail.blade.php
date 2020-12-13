@@ -19,8 +19,9 @@
                     <article class="card">
                         <header class="card-header">
                             <a href="{{route('user.orders')}}" class="btn btn-sm btn-primary"><i class="fa fa-arrow-left"></i></a>
-                            <strong class="d-inline-block mr-3">Order ID: #{{$order->id}}</strong>
-                            <span>Tanggal Pesanan: {{$order->created_at->format('d F Y')}} ({{$order->created_at->diffForHumans()}})</span>
+                            <strong class="d-inline-block mx-3">Order ID: #{{$order->id}}</strong>
+                            <strong class="d-inline-block mx-3">Invoice: {{$order->invoice->number}}</strong>
+                            <span class="d-inline-block mx-3">Tanggal Pesanan: {{$order->created_at->format('d F Y')}}</span>
                         </header>
                         <div class="card-body">
                             <div class="row">

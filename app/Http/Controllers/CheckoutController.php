@@ -106,8 +106,8 @@ class CheckoutController extends Controller
                     'order_id' => $order->id,
                     'amount' => $totalAmount,
                     'status' => Invoice::STATUS_UNPAID,
-                    'due_date' => $due = now()->format('Y-m-d'),
-                    'number' => uniqid(implode('/', ['INV', $due, $order->id]), true)
+                    'due_date' => now()->format('Y-m-d'),
+                    'number' => implode('/', ['INV', today()->format('Ymd'), $order->id])
                 ]);
 
                 $payment = Payment::create([
