@@ -60,13 +60,18 @@
                                 </div>
                             </div> <!-- col.// -->
                             <div class="col text-right">
-                                <button class="btn btn-primary" id="btnAddToCart"> <span class="text">Add to cart</span> <i class="icon fas fa-shopping-cart"></i> </button>
+                                @if($product->stock > 1)
+                                    <button class="btn btn-primary" id="btnAddToCart"> <span class="text">Tambah ke Keranjang Belanja</span> <i class="icon fas fa-shopping-cart"></i> </button>
+                                @else
+                                    <button class="btn btn-info"> <span class="text">Stok Produk Habis</span> <i class="icon fas fa-shopping-cart"></i> </button>
+                                @endif
                             </div> <!-- col.// -->
                         </div> <!-- row.// -->
 
                     </article> <!-- product-info-aside .// -->
                 </main> <!-- col.// -->
             </div> <!-- row.// -->
+            @if($product->ratings->isNotEmpty())
             <div class="row">
                 <div class="col-md-12">
                     <header class="section-heading">
@@ -112,6 +117,7 @@
 
                 </div> <!-- col.// -->
             </div> <!-- row.// -->
+            @endif
         </div>
     </section>
     <form action="{{route('cart.add_item', $product->slug)}}" method="POST" class="d-none" id="formAddToCart">
