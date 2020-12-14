@@ -220,7 +220,7 @@
                     });
                     myDropzone.on('complete', function(file) {
                         Toast.fire({
-                            title: 'Image uploaded successfully',
+                            title: 'Gambar berhasil diunggah',
                             icon: 'success'
                         })
                         window.location.reload();
