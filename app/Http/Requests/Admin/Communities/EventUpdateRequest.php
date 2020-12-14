@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Communities;
+namespace App\Http\Requests\Admin\Communities;
 
 use Illuminate\Foundation\Http\FormRequest;
 

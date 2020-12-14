@@ -4,15 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\CommunityEventDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Communities\EventStoreRequest;
-use App\Http\Requests\Communities\EventUpdateRequest;
+use App\Http\Requests\Admin\Communities\EventStoreRequest;
+use App\Http\Requests\Admin\Communities\EventUpdateRequest;
 use App\Models\Community;
 use App\Models\CommunityEvent;
 use App\Models\CommunityEventAttendee;
 use App\Models\CommunityMember;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CommunityEventController extends Controller

@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\ProductDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\ProductStoreRequest;
-use App\Http\Requests\Product\ProductUpdateRequest;
-use App\Models\Community;
+use App\Http\Requests\Admin\Product\ProductStoreRequest;
+use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {

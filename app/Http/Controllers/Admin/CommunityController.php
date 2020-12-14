@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\CommunityDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Communities\CommunityStoreRequest;
-use App\Http\Requests\Communities\CommunityUpdateRequest;
+use App\Http\Requests\Admin\Communities\CommunityStoreRequest;
+use App\Http\Requests\Admin\Communities\CommunityUpdateRequest;
 use App\Models\Community;
 use App\Models\CommunityMember;
 use App\Models\CommunityRole;

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\StoreDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Stores\StoreStoreRequest;
-use App\Http\Requests\Stores\StoreUpdateRequest;
+use App\Http\Requests\Admin\Stores\StoreStoreRequest;
+use App\Http\Requests\Admin\Stores\StoreUpdateRequest;
 use App\Models\Community;
 use App\Models\Store;
 use Illuminate\Support\Facades\Storage;

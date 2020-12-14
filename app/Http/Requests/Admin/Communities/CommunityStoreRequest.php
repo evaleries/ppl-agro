@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Communities;
+namespace App\Http\Requests\Admin\Communities;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventStoreRequest extends FormRequest
+class CommunityStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,16 @@ class EventStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'community_id' => ['required', 'numeric', 'exists:communities,id'],
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['string', 'max:255', 'required'],
+            'user_id' => ['required', 'numeric', 'exists:users,id'],
             'image' => ['required', 'image'],
             'description' => ['nullable', 'string'],
-            'location' => ['nullable', 'string'],
-            'max_attendees' => ['nullable', 'numeric'],
-            'started_at' => ['required', 'date_format:Y-m-d\TH:i'],
-            'ended_at' => ['required', 'date_format:Y-m-d\TH:i']
+            'whatsapp' => ['nullable', 'numeric', 'starts_with:62', 'max:20'],
+            'founded_at' => ['nullable', 'date'],
+            'instagram' => ['nullable', 'alpha_dash', 'max:32'],
+            'facebook' => ['nullable', 'url'],
+            'is_active' => ['boolean']
         ];
     }
+
 }
