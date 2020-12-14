@@ -6,7 +6,10 @@ use App\DataTables\Admin\ProposalDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Community;
 use App\Models\CommunityProposal;
+use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CommunityProposalController extends Controller
 {
@@ -48,7 +51,7 @@ class CommunityProposalController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param CommunityProposal $proposal
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, CommunityProposal $proposal)
@@ -57,28 +60,52 @@ class CommunityProposalController extends Controller
             'reject_reason' => 'required_if:action,reject|nullable|string'
         ]);
 
-        if ($request->action === 'accept') {
-            $proposal->user->assignRole('seller');
-            $proposal->update([
-                'approved_at' => now(),
-            ]);
-            Community::where('user_id', $proposal->user->id)->firstOr(function () use ($proposal) {
-                return Community::create([
-                    'user_id' => $proposal->user->id,
-                    'is_active' => 0,
-                    'name' => $proposal->name,
-                    'logo' => $proposal->banner,
-                    'description' => $proposal->description
+        DB::beginTransaction();
+        $responseMessage = 'Pengajuan telah disetujui dan komunitas baru telah dibuat';
+        try {
+            if ($request->action === 'accept') {
+                $proposal->user->assignRole('seller');
+                $proposal->update([
+                    'approved_at' => now(),
                 ]);
-            });
-            return redirect()->route('admin.proposals.index')->withSuccess('Pengajuan telah disetujui dan komunitas baru telah dibuat');
+                $community = Community::where('user_id', $proposal->user->id)->firstOr(function () use ($proposal) {
+                    return Community::create([
+                        'user_id' => $proposal->user->id,
+                        'is_active' => 0,
+                        'name' => $proposal->name,
+                        'logo' => $proposal->banner,
+                        'description' => $proposal->description
+                    ]);
+                });
+                Store::where('community_id', $community->id)->firstOr(function () use ($community, $proposal) {
+                    return Store::create([
+                        'community_id' => $community->id,
+                        'name' => $proposal->name,
+                        'slug' => Str::slug($proposal->name),
+                        'address' => '',
+                        'verified_at' => now(),
+                        'image' => $proposal->banner,
+                        'city_id' => 160, // JEMBER
+                        'province_id' => 11
+                    ]);
+                });
+            }
+
+            if ($request->action === 'reject') {
+                $proposal->update([
+                    'rejected_at' => now(),
+                    'reject_reason' => $request->reject_reason,
+                ]);
+
+                $responseMessage = 'Pengajuan berhasil ditolak';
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->route('admin.proposals.index')->withErrors($exception->getMessage());
         }
 
-        $proposal->update([
-            'rejected_at' => now(),
-            'reject_reason' => $request->reject_reason,
-        ]);
-        return redirect()->route('admin.proposals.index')->withSuccess('Pengajuan berhasil ditolak');
+        return redirect()->route('admin.proposals.index')->withSuccess($responseMessage);
     }
 
 }
