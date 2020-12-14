@@ -77,7 +77,7 @@
                         <h2>Selamat Datang, {{auth()->user()->first_name}}!</h2>
                         <p class="lead">Anda telah menjadi seller di {{config('app.name')}}. Anda dapat mulai dengan menambahkan informasi untuk komunitas dan toko Anda.</p>
                         <div class="mt-4">
-                            <a href="{{route('seller.community.index')}}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-edit"></i> Ubah Komunitas</a>
+                            <a href="{{route('seller.community.edit')}}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i class="fas fa-edit"></i> Ubah Informasi Komunitas</a>
                         </div>
                     </div>
                 </div>

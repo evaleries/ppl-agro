@@ -33,9 +33,6 @@
                         <p>{!! $community->description !!}</p>
                     </div>
                     <div class="card-footer text-center pt-0">
-                        <div class="btn-group float-right">
-                            <a href="{{ route('seller.community.edit') }}" class="btn btn-warning">Edit</a>
-                        </div>
                         @if ($community->facebook || $community->whatsapp || $community->instagram)
                             <div class="font-weight-bold mb-2 text-small">Social Media</div>
                         @endif
@@ -73,7 +70,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Full Name</th>
-{{--                                    <th>Role</th>--}}
                                     <th>Join Date</th>
                                 </tr>
                                 </thead>
@@ -82,7 +78,6 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{$member->user->full_name}}</td>
-{{--                                        <td>{{ $member->role->name }}</td>--}}
                                         <td>{{ $member->joined_at }}</td>
                                     </tr>
                                 @endforeach
@@ -95,10 +90,3 @@
         </div>
     </section>
 @endsection
-
-@push('javascript')
-    <script>
-        $(function () {
-        })
-    </script>
-@endpush
