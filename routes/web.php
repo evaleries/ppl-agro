@@ -51,8 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
        Route::post('products/{id}/images', 'ProductController@uploadImage')->name('products.upload_image');
        Route::delete('products/{id}/images', 'ProductController@deleteImage')->name('products.delete_image');
        Route::resource('withdraw', 'WithdrawController')->except(['destroy', 'edit', 'update']);
-       Route::get('orders', 'OrderController@index')->name('orders.index');
-       Route::get('orders/{order}', 'OrderController@show')->name('orders.show');
+       Route::resource('orders', 'OrderController')->except(['destroy', 'create', 'store']);
     });
 
     // User

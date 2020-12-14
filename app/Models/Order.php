@@ -32,7 +32,7 @@ class Order extends Model
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_PROCESSING = 'PROCESSING';
     public const STATUS_COMPLETED = 'COMPLETED';
-    public const STATUS_ON_DELIVERY = 'OTW';
+    public const STATUS_ON_DELIVERY = 'ON_DELIVERY';
     public const STATUS_CANCELLED = 'CANCELLED';
 
     /**
@@ -72,6 +72,17 @@ class Order extends Model
         return $this->hasOne('App\Models\Shipping');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function store()
     {
         return $this->belongsTo('App\Models\Store');
