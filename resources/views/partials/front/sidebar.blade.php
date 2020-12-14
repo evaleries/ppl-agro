@@ -3,7 +3,7 @@
     <ul class="list-group list-unstyled">
         <a class="list-group-item {{request()->routeIs('user.overview') ? 'active' : ''}}" href="{{route('user.overview')}}"> Account Overview</a>
         <a class="list-group-item {{request()->routeIs('user.orders') ? 'active' : ''}}" href="{{ route('user.orders') }}"> Orders </a>
-        <a class="list-group-item" href="#"> Events </a>
+{{--        <a class="list-group-item" href="#"> Events </a>--}}
         @if (!auth()->user()->hasRole('seller'))
         <a href="{{route('user.community.propose')}}" class="list-group-item"> Ajukan Komunitas </a>
         @endif

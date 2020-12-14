@@ -29,7 +29,7 @@ class ProductDataTable extends DataTable
                 return $product->weight .' '. $product->weight_unit;
             })
             ->addColumn('action', function ($product) {
-                return '<a href="'. route('admin.products.show', $product->id). '" class="btn btn-md btn-outline-primary" title="Detail '. $product->name .'"><i class="fa fa-eye"></i></a>';
+                return '<a href="'. route('seller.products.show', $product->id). '" class="btn btn-md btn-outline-primary" title="Detail '. $product->name .'"><i class="fa fa-eye"></i></a>';
             });
     }
 
@@ -84,7 +84,6 @@ class ProductDataTable extends DataTable
             Column::make('stock'),
             Column::computed('weight_info')->searchable(false)->orderable(false)->title('Berat'),
             Column::computed('category')->orderable(false)->searchable(false),
-            Column::make('community')->data('store.community.name'),
             Column::make('updated_at'),
         ];
     }

@@ -43,7 +43,7 @@ class ProductController extends Controller
             });
         });
 
-        $products = $products->paginate(6);
+        $products = $products->latest()->paginate(6);
         return view('frontpages.products', compact('products', 'header', 'category'));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Product;
+namespace App\Http\Requests\Seller\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -30,8 +30,6 @@ class ProductUpdateRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'numeric'],
             'description' => ['nullable', 'string'],
-            'weight' => ['required', 'numeric'],
-            'weight_unit' => ['required', 'in:kg,g'],
             'extra_keys' => ['required_with:extra_values', 'nullable', 'array'],
             'extra_values' => ['required_with:extra_keys', 'nullable', 'array'],
             'slug' => ['required'],
