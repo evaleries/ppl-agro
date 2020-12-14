@@ -53,7 +53,7 @@ class PaymentController extends Controller
             if ($request->action === 'accept') {
                 $payment->update(['status' => Payment::STATUS_RELEASED]);
                 $payment->invoice->update(['status' => Invoice::STATUS_PAID]);
-                $payment->invoice->order->update(['status' => Order::STATUS_PROCESSING]);
+                $payment->invoice->order->update(['status' => Order::STATUS_PROCESSING, 'confirmed_at' => now()]);
             } elseif ($request->action === 'reject') {
                 $payment->update(['status' => Payment::STATUS_CANCELLED]);
                 $payment->invoice->update(['status' => Invoice::STATUS_UNPAID]);
