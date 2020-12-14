@@ -111,7 +111,7 @@
                                 @foreach ($store->products as $product)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
-                                        <td><a href="{{route('admin.products.show', $product->slug)}}">{{$product->name}}</a></td>
+                                        <td><a href="{{route('seller.products.show', $product->slug)}}">{{$product->name}}</a></td>
                                         <td>{{$product->category->name}}</td>
                                         <td>@priceIDR($product->price)</td>
                                         <td>{{$product->stock}}</td>
