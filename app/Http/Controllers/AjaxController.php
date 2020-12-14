@@ -36,7 +36,7 @@ class AjaxController extends Controller
         $this->validate($request, [
             'origin' => 'required|numeric',
             'destination' => 'required|numeric',
-            'weight' => 'required|numeric|min:1000',
+            'weight' => 'required|numeric|min:1',
             'courier' => 'required|string|in:jne,tiki,pos'
         ]);
 

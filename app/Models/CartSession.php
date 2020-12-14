@@ -178,7 +178,7 @@ class CartSession
             $item = (object) $item;
             if ($item->product->weight_unit === 'kg') {
                 $carry += $item->product->weight * 1000 * $item->quantity;
-            } elseif ($item->product->weigh_unit === 'g') {
+            } elseif ($item->product->weight_unit === 'g') {
                 $carry += $item->product->weight * $item->quantity;
             }
             return $carry;
