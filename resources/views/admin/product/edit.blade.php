@@ -45,10 +45,27 @@
                                     <div class="form-group col-6">
                                         <label for="address">Price</label>
                                         <input type="number" name="price" class="form-control" value="{{old('price', $product->price)}}" required>
+                                        <small class="form-text text-muted">
+                                            Minimal harga @priceIDR(10000)
+                                        </small>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="address">Stock</label>
                                         <input type="number" min="1" name="stock" class="form-control" value="{{old('stock', $product->stock)}}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="weight">Berat</label>
+                                        <input type="number" name="weight" id="weight" placeholder="Berat dalam angka" class="form-control" value="{{old('weight', $product->weight)}}" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="weight_unit">Satuan Berat</label>
+                                        <select name="weight_unit" id="weight_unit" class="form-control">
+                                            <option value="kg" {{$product->weight === 'kg' ? 'selected' : ''}}>Kilo Gram</option>
+                                            <option value="g" {{$product->weight === 'g' ? 'selected' : ''}}>Gram</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -63,7 +80,7 @@
                                     <span class="form-text text-muted">
                                         Informasi tambahan
                                     </span>
-				    @if ($product->extra_info)
+				                    @if ($product->extra_info)
                                     @foreach ($product->extra_info as $key => $val)
                                         @if (empty($key) && empty($val)) @continue @endif
                                         <div class="d-flex my-2">
@@ -79,13 +96,13 @@
                                             </div>
                                         </div>
                                     @endforeach
-				    @endif
+				                    @endif
                                     <div class="d-flex my-2 extra-info-template">
                                         <div class="col-md-4">
-                                            <input type="text" name="extra_keys[]" placeholder="berat" class="form-control form-control-sm">
+                                            <input type="text" name="extra_keys[]" placeholder="kualitas" class="form-control form-control-sm">
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" name="extra_values[]" placeholder="1 kg" class="form-control form-control-sm">
+                                            <input type="text" name="extra_values[]" placeholder="asli" class="form-control form-control-sm">
                                         </div>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-info btn-add-extra-info">Add <i class="fa fa-plus"></i></button>
