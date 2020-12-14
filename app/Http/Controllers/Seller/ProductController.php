@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seller;
 use App\DataTables\Seller\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Seller\Product\ProductStoreRequest;
+use App\Http\Requests\Seller\Product\ProductUpdateRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
@@ -79,11 +80,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param ProductUpdateRequest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
         abort_if(auth()->user()->community->store->products()->find(['id' => $id])->isEmpty(), 403);
         Product::findOrFail($id)->update($request->validated());
