@@ -162,12 +162,12 @@ class CheckoutController extends Controller
                     'description' => 'Pembayaran untuk Order #'.$order->id
                 ]);
             }
+            DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();
             return redirect()->back()->withErrors($exception->getMessage())->withInput();
         }
 
-        DB::commit();
         $this->cart->clear();
         return redirect()->route('checkout.success');
     }
