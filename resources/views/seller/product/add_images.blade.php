@@ -39,7 +39,7 @@
     <script>
         $(function() {
             $('.dropzone').dropzone({
-                url: '{{route('admin.products.upload_image', $product->id)}}',
+                url: '{{route('seller.products.upload_image', $product->id)}}',
                 autoProcessQueue: false,
                 addRemoveLinks: true,
                 maxFileSize: 3,
@@ -62,7 +62,7 @@
                     });
                     myDropzone.on("complete", function(file) {
                         myDropzone.removeFile(file);
-                        window.location.href = '{{route('admin.products.show', $product->id)}}';
+                        window.location.href = '{{route('seller.products.show', $product->id)}}';
                     });
                 }
             });

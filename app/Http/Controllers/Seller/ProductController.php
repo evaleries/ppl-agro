@@ -47,7 +47,7 @@ class ProductController extends Controller
     {
         $product = Product::create($request->validated());
 
-        return redirect()->route('seller.product.add_image', $product->id);
+        return redirect()->route('seller.products.add_image', $product->id);
     }
 
     /**
