@@ -53,7 +53,7 @@ class CartSession
     public function add(Product $product, $quantity)
     {
         $index = $this->findKey($product->id);
-        if ($index !== null) {
+        if ($index !== null && $index !== false) {
             $this->update($product, ($this->items->get($index)['quantity'] ?? 0) + $quantity);
         } else {
             $this->items->push(['product' => $product, 'store_id' => $product->store_id, 'product_id' => $product->id, 'quantity' => $quantity, 'price' => $product->price, 'total_price' => $product->price * $quantity]);
