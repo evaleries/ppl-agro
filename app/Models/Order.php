@@ -79,16 +79,19 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        return $this->items->sum('price');
+        return $this->items->reduce(function ($carry, $item) {
+            $carry += $item->price * $item->quantity;
+            return $carry;
+        }, 0);
     }
 
     public function getTotalAmountAttribute()
     {
-        return $this->items->sum('price') + ($this->attributes['shipping_cost'] ?? 0) + $this->getPpnAttribute();
+        return $this->getTotalAttribute() + ($this->attributes['shipping_cost'] ?? 0) + $this->getPpnAttribute();
     }
 
     public function getPpnAttribute()
     {
-        return $this->items->sum('price') * 0.1;
+        return $this->getTotalAttribute() * 0.1;
     }
 }
