@@ -56,7 +56,7 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
             <li class="{{request()->routeIs('seller.store.index') ? 'active' : ''}}">
                 <a href="{{route('seller.store.index')}}" class="nav-link"><i class="fas fa-store"></i> <span>Toko</span></a>
             </li>
-            <li class="{{request()->routeIs('seller.orders.index') ? 'active' : ''}}">
+            <li class="{{request()->routeIs('seller.products.index') ? 'active' : ''}}">
                 <a href="{{route('seller.products.index')}}" class="nav-link"><i class="fas fa-box"></i> <span>Produk</span></a>
             </li>
             <li class="{{request()->routeIs('seller.orders.index') ? 'active' : ''}}">
