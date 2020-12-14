@@ -380,7 +380,7 @@
 
                 // payment
                 $.each($('input[name=payment_method]'), function (index, paymentMethod) {
-                    if ($(paymentMethod).attr('checked')) {
+                    if ($(paymentMethod).is(':checked')) {
                         if ($(paymentMethod).val() === 'bank') {
                             if ($('#account_number').val() == '') {
                                 isReadyToCheckout = false;

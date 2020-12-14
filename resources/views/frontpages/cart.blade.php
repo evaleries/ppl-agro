@@ -16,6 +16,11 @@
             <div class="row">
                 <main class="col-md-9">
                     <div class="card">
+                        @if($cart->totalWeight < 1000)
+                        <div class="alert alert-warning">
+                            <p>Minimal total berat produk untuk pemesanan yaitu 1 kg</p>
+                        </div>
+                        @endif
                         <table class="table table-borderless table-shopping-cart">
                             <thead class="text-muted">
                             <tr class="small text-uppercase">
@@ -94,7 +99,7 @@
                             </p>
                             @if (empty($cartItems))
                                 <a href="#" class="btn btn-empty-cart btn-block btn-light" disabled> Checkout </a>
-                            @else
+                            @elseif($cart->totalWeight() >= 1000)
                                 <a href="{{route('checkout')}}" id="checkout" class="btn btn-block btn-primary"> Checkout </a>
                             @endif
                             <a href="{{route('products')}}" class="btn btn-block btn-light"> Continue shopping </a>
