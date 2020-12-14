@@ -40,6 +40,16 @@ Route::group(['middleware' => 'auth'], function () {
     // Seller
     Route::group(['middleware' => 'role:seller', 'namespace' => 'Seller', 'prefix' => 'seller', 'as' => 'seller.'], function () {
        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+       Route::get('community', 'CommunityController@index')->name('community.index');
+       Route::get('community/edit', 'CommunityController@edit')->name('community.edit');
+       Route::put('community', 'CommunityController@update')->name('community.update');
+       Route::get('store', 'StoreController@index')->name('store.index');
+       Route::get('store/edit', 'StoreController@edit')->name('store.edit');
+       Route::put('store', 'StoreController@update')->name('store.update');
+       Route::resource('products', 'ProductController');
+       Route::resource('withdraw', 'WithdrawController')->except(['destroy', 'edit', 'update']);
+       Route::get('orders', 'OrderController@index')->name('orders.index');
+       Route::get('orders/{order}', 'OrderController@show')->name('orders.show');
     });
 
     // User

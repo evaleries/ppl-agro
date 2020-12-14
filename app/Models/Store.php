@@ -74,6 +74,11 @@ class Store extends Model
         return $this->hasMany('App\Models\Product');
     }
 
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

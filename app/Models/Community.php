@@ -55,15 +55,14 @@ class Community extends Model
     public function members()
     {
         return $this->hasMany('App\Models\CommunityMember');
-//        return $this->belongsToMany('App\Models\User', 'community_members', 'community_id', 'user_id')->withPivot('joined_at')->withTimestamps();
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function stores()
+    public function store()
     {
-        return $this->hasMany('App\Models\Store');
+        return $this->hasOne('App\Models\Store');
     }
 
     public function getLogoUrlAttribute()

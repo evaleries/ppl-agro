@@ -18,8 +18,8 @@
                                 <div class="profile-widget-item-value">{{ $community->members->count() }}</div>
                             </div>
                             <div class="profile-widget-item">
-                                <div class="profile-widget-item-label">Stores</div>
-                                <div class="profile-widget-item-value">{{ $community->stores->count() }}</div>
+                                <div class="profile-widget-item-label">Products</div>
+                                <div class="profile-widget-item-value">{{ $community->store->products->count() }}</div>
                             </div>
                             <div class="profile-widget-item">
                                 <div class="profile-widget-item-label">Events</div>

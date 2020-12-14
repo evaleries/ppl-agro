@@ -50,6 +50,29 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
                 <a href="{{route('admin.payments.index')}}" class="nav-link"><i class="fas fa-money-bill-wave"></i> <span>Payments</span></a>
             </li>
         @endcan
+
+        @role('seller')
+            <li class="menu-header">Toko</li>
+            <li class="{{request()->routeIs('seller.store.index') ? 'active' : ''}}">
+                <a href="{{route('seller.store.index')}}" class="nav-link"><i class="fas fa-store"></i> <span>Toko</span></a>
+            </li>
+            <li class="{{request()->routeIs('seller.orders.index') ? 'active' : ''}}">
+                <a href="{{route('seller.products.index')}}" class="nav-link"><i class="fas fa-box"></i> <span>Produk</span></a>
+            </li>
+            <li class="{{request()->routeIs('seller.orders.index') ? 'active' : ''}}">
+                <a href="{{route('seller.orders.index')}}" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>Pesanan</span></a>
+            </li>
+            <li class="{{request()->routeIs('seller.withdraw.index') ? 'active' : ''}}">
+                <a href="{{route('seller.withdraw.index')}}" class="nav-link"><i class="fas fa-money-bill-wave"></i> <span>Pencairan Dana</span></a>
+            </li>
+            <li class="menu-header">Komunitas</li>
+            <li class="{{request()->routeIs('seller.community.index') ? 'active' : ''}}">
+                <a href="{{route('seller.community.index')}}" class="nav-link"><i class="fas fa-comments"></i> <span>Komunitas Saya</span></a>
+            </li>
+            <li class="{{request()->routeIs('seller.community.edit') ? 'active' : ''}}">
+                <a href="{{route('seller.community.edit')}}" class="nav-link"><i class="fas fa-edit"></i> <span>Ubah Informasi</span></a>
+            </li>
+        @endrole
     </ul>
     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
         <a href="{{ url('/') }}" class="btn btn-primary btn-lg btn-block btn-icon-split">
