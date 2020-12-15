@@ -69,6 +69,9 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
             <li class="{{request()->routeIs('seller.community.index') ? 'active' : ''}}">
                 <a href="{{route('seller.community.index')}}" class="nav-link"><i class="fas fa-comments"></i> <span>Komunitas Saya</span></a>
             </li>
+            <li class="{{ request()->routeIs('seller.events.index') ? 'active' : '' }}">
+                <a href="{{route('seller.events.index')}}" class="nav-link"><i class="fas fa-calendar-week"></i> <span>Kegiatan</span></a>
+            </li>
             <li class="{{request()->routeIs('seller.community.edit') ? 'active' : ''}}">
                 <a href="{{route('seller.community.edit')}}" class="nav-link"><i class="fas fa-edit"></i> <span>Ubah Informasi</span></a>
             </li>
