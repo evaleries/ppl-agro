@@ -60,4 +60,9 @@ class StoreBalance extends Model
                 return 'Unknown';
         }
     }
+
+    public function scopeAvailable($q)
+    {
+        return $q->where('store_id', auth()->user()->community->store->id)->where('type', self::TYPE_COMPLETED);
+    }
 }

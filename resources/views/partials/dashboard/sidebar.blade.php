@@ -62,8 +62,8 @@ $dashboardRoute = auth()->user()->hasRole('admin') ? 'admin.dashboard' : 'seller
             <li class="{{request()->routeIs('seller.orders.index') ? 'active' : ''}}">
                 <a href="{{route('seller.orders.index')}}" class="nav-link"><i class="fas fa-shopping-cart"></i> <span>Pesanan</span></a>
             </li>
-            <li class="{{request()->routeIs('seller.withdraw.index') ? 'active' : ''}}">
-                <a href="{{route('seller.withdraw.index')}}" class="nav-link"><i class="fas fa-money-bill-wave"></i> <span>Pencairan Dana</span></a>
+            <li class="{{request()->routeIs('seller.withdrawals.index') ? 'active' : ''}}">
+                <a href="{{route('seller.withdrawals.index')}}" class="nav-link"><i class="fas fa-money-bill-wave"></i> <span>Pencairan Dana</span></a>
             </li>
             <li class="menu-header">Komunitas</li>
             <li class="{{request()->routeIs('seller.community.index') ? 'active' : ''}}">
