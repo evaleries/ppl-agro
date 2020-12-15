@@ -43,6 +43,9 @@ Route::group(['middleware' => 'auth'], function () {
        Route::get('community', 'CommunityController@index')->name('community.index');
        Route::get('community/edit', 'CommunityController@edit')->name('community.edit');
        Route::put('community', 'CommunityController@update')->name('community.update');
+       Route::resource('events', 'CommunityEventController');
+       Route::post('events/attendee/add', 'CommunityEventController@addAttendee')->name('events.add_attendee');
+       Route::delete('events/attendee/remove', 'CommunityEventController@removeAttendee')->name('events.remove_attendee');
        Route::get('store', 'StoreController@index')->name('store.index');
        Route::get('store/edit', 'StoreController@edit')->name('store.edit');
        Route::put('store', 'StoreController@update')->name('store.update');
