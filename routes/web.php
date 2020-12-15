@@ -62,6 +62,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'account', 'namespace' => 'User', 'as' => 'user.'], function () {
             Route::get('orders', 'UserController@orders')->name('orders');
             Route::get('orders/{order}', 'UserController@show')->name('orders.show');
+            Route::put('orders/{order}', 'UserController@updateOrder')->name('orders.update');
             Route::get('overview', 'UserController@overview')->name('overview');
             Route::get('community/propose', 'UserController@propose')->name('community.propose');
             Route::post('community', 'UserController@storeProposal')->name('community.propose.store');

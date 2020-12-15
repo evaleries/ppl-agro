@@ -51,7 +51,7 @@ class OrderController extends Controller
             return redirect()->back()->withError('Perubahan tidak berhasil! Nomor resi sudah disimpan sebelumnya!');
         }
 
-        $order->shipping->update(['status' => Shipping::STATUS_SHIPPED, 'tracking_code' => $request->get('tracking_code')]);
+        $order->shipping->update(['status' => Shipping::STATUS_PROCESSING, 'tracking_code' => $request->get('tracking_code')]);
         $order->update(['status' => Order::STATUS_ON_DELIVERY]);
 
         return redirect()->back()->withSuccess('Nomor resi berhasil disimpan. Sekarang pesanan dalam status pengiriman!');

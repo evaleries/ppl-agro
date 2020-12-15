@@ -8,7 +8,10 @@ use App\Http\Requests\ProposalStoreRequest;
 use App\Models\Community;
 use App\Models\CommunityProposal;
 use App\Models\Order;
+use App\Models\Shipping;
+use App\Models\StoreBalance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -20,13 +23,38 @@ class UserController extends Controller
     }
 
     /**
-     * @TODO: add policy
      * @param Order $order
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Order $order)
     {
+        abort_if($order->user->id !== auth()->user()->id, 403);
         return view('frontpages.account.order_detail', compact('order'));
+    }
+
+    public function updateOrder(Order $order)
+    {
+        abort_if($order->user->id !== auth()->user()->id, 403);
+
+        DB::beginTransaction();
+        try {
+            $order->update(['status' => Order::STATUS_COMPLETED]);
+            $order->shipping->update(['status' => Shipping::STATUS_SHIPPED]);
+            $order->store->balances()
+                ->where('store_id', $order->store_id)
+                ->where('description', 'like', '%#'. $order->id .'%')
+                ->where('type', StoreBalance::TYPE_PENDING)
+                ->where('amount', $order->total_amount - $order->ppn)
+                ->firstOrFail()
+                ->update(['type' => StoreBalance::TYPE_COMPLETED]);
+
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return redirect()->back()->withErrors($exception->getMessage());
+        }
+
+        return redirect()->back()->withSuccess('Pesanan telah selesai, Terima kasih telah memesan di '. config('app.name'));
     }
 
     public function propose()

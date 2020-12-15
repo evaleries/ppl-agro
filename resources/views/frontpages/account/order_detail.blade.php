@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', 'Detail Pesanan')
+@section('title', 'Detail Pesanan #'.$order->id)
 
 @section('header')
     <section class="section-pagetop bg">
@@ -24,6 +24,7 @@
                             <span class="d-inline-block mx-3">Tanggal Pesanan: {{$order->created_at->format('d F Y')}}</span>
                         </header>
                         <div class="card-body">
+                            @include('partials.alerts')
                             <div class="row">
                                 <div class="col-md-4">
                                     <h6 class="text-muted">Alamat Pengiriman</h6>
@@ -62,18 +63,28 @@
                                         <img src="{{optional($item->product->images->first())->image_url}}" class="img-xs border">
                                     </td>
                                     <td>
-                                        <p class="title mb-0">{{$item->product->name}}</p>
-                                        <var class="price text-muted">@priceIDR($item->price * $item->quantity) | Qty: {{$item->quantity}} (satuan: @priceIDR($item->price))</var>
+                                        <p class="title mb-0"><a href="{{route('product.show', [$item->product->store->slug, $item->product->slug])}}">{{$item->product->name}}</a></p>
+                                        <var class="price text-muted">@priceIDR($item->price) | Qty: {{$item->quantity}}</var>
                                     </td>
-                                    <td> Penjual <br> {{$item->product->store->name}} </td>
+                                    <td>@priceIDR($item->price * $item->quantity)</td>
                                     @if ($order->status === \App\Models\Order::STATUS_ON_DELIVERY)
-                                    <td width="125">Nomor Tracking: {{$order->shipping->tracking_code}} - dikirim oleh {{strtoupper($order->shipping->shipper)}} - {{$order->shipping->service}} </td>
-                                    <td width="125">Perkiraan tiba: {{$order->shipping->etd}} hari </td>
+                                    <td>Nomor Resi: {{$order->shipping->tracking_code}} <br> Dikirim oleh {{strtoupper($order->shipping->shipper)}} {{$order->shipping->service}}
+                                        <br>Perkiraan tiba: {{$order->shipping->estimated_delivery}} hari  </td>
                                     @endif
                                 </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            @if($order->status === \App\Models\Order::STATUS_ON_DELIVERY)
+                                <hr>
+                                <div class="mx-4 my-4">
+                                    <p>Apabila anda sudah menerima pesanan, mohon untuk klik tombol berikut.</p>
+                                    <form action="{{route('user.orders.update', $order->id)}}" id="formAction" method="POST">
+                                        @csrf @method('PUT')
+                                        <button type="submit" id="btnComplete" class="btn btn-md btn-primary">SELESAI</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div> <!-- table-responsive .end// -->
                     </article> <!-- order-group.// -->
                 </main>
@@ -81,3 +92,30 @@
         </div>
     </section>
 @endsection
+
+@push('javascript')
+    <script>
+        $(function() {
+            $('#btnComplete').on('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Konfirmasi Selesai',
+                    input: 'checkbox',
+                    icon: 'warning',
+                    inputValue: 0,
+                    showCancelButton: true,
+                    focusCancel: true,
+                    inputPlaceholder: 'Saya sudah menerima barang dan sesuai dengan apa yang saya pesan',
+                    confirmButtonText: 'Konfirmasi <i class="fas fa-check"></i>',
+                    inputValidator: (result) => {
+                        return !result && 'Anda harus memastikan bahwa barang sudah diterima'
+                    }
+                }).then(result => {
+                    if (result.value) {
+                        $('#formAction').submit();
+                    }
+                });
+            })
+        });
+    </script>
+@endpush

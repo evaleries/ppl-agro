@@ -23,7 +23,7 @@ class StoreBalance extends Model
      */
     protected $keyType = 'integer';
 
-    public const TYPE_COMPLETE = 1;
+    public const TYPE_COMPLETED = 1;
     public const TYPE_PENDING = 2;
     public const TYPE_WITHDRAW = 3;
     public const TYPE_CANCELLED = -1;

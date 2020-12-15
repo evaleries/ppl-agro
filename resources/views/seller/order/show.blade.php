@@ -31,7 +31,7 @@
                                 <small>{{$order->confirmed_at}}</small>
                             </div>
                         </div>
-                        <div class="wizard-step {{$order->status === \App\Models\Order::STATUS_ON_DELIVERY ? 'wizard-step-active' : ''}}">
+                        <div class="wizard-step {{$order->status === \App\Models\Order::STATUS_ON_DELIVERY || $order->shipping->status === \App\Models\Shipping::STATUS_SHIPPED ? 'wizard-step-active' : ''}}">
                             <div class="wizard-step-icon">
                                 <i class="fas fa-shipping-fast"></i>
                             </div>
