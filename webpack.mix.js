@@ -22,8 +22,8 @@ mix.sass('resources/sass/app.scss', css)
     .sass('resources/sass/front/bootstrap.scss', css)
     .js('resources/js/app.js', js)
     .js('resources/js/front.js', js)
-    // .extract();
+    .extract();
 
-if (mix.inProduction()) {
-    mix.version();
-}
+// if (mix.inProduction()) {
+//     mix.version();
+// }
