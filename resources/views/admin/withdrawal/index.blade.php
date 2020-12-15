@@ -11,7 +11,6 @@
                 </div>
                 <div class="card-body">
                     @include('partials.alerts')
-                    <p>Ajukan pencairan baru dengan mengklik tombol +Create</p>
                     <div class="table-responsive">
                         {{ $dataTable->table() }}
                     </div>

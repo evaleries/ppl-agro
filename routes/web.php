@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('products/{id}/images', 'ProductController@uploadImage')->name('products.upload_image');
         Route::delete('products/{id}/images', 'ProductController@deleteImage')->name('products.delete_image');
         Route::resource('payments', 'PaymentController')->only(['index', 'show', 'update']);
+        Route::resource('withdrawals', 'WithdrawController')->only(['index', 'edit', 'update']);
     });
 
     // Seller
@@ -77,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('checkout', 'CheckoutController@index')->name('checkout');
     Route::post('checkout/process', 'CheckoutController@process')->name('checkout.process');
     Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
+    Route::post('/rate/{product}', 'ProductController@rate')->name('product.rate');
 });
 
 Route::get('/ajax/provinces', 'AjaxController@provinces')->name('ajax.provinces');
@@ -85,5 +87,5 @@ Route::post('/ajax/shipping', 'AjaxController@shippingRate')->name('ajax.shippin
 
 Route::get('/category/{category}', 'ProductController@category')->name('category');
 Route::get('/products', 'ProductController@index')->name('products');
-Route::get('/{store}/{product}', 'HomeController@showProduct')->name('product.show');
+Route::get('/{store}/{product}', 'ProductController@show')->name('product.show');
 

@@ -176,8 +176,21 @@
                                 <div class="form-group">
                                     <label for="tracking_code">Nomor Resi</label>
                                     <input type="text" class="form-control" minlength="5" name="tracking_code" id="tracking_code" required value="{{old('tracking_code', $order->shipping->tracking_code)}}" @if(!empty($order->shipping->tracking_code)) disabled readonly @endif
-                                    <small class="text-muted">Anda tidak dapat merubah nomor resi setelah disimpan. Pastikan anda mengisi dengan benar</small>
+                                    <small class="text-muted form-text">Anda tidak dapat merubah nomor resi setelah disimpan. Pastikan anda mengisi dengan benar</small>
                                 </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-6">
+                                        <label for="shipper">Jasa Pengiriman</label>
+                                        <input type="text" readonly value="{{strtoupper($order->shipping->shipper)}}" class="form-control">
+                                        <small class="text-muted form-text">Anda harus mengirim sesuai dengan jasa pengiriman di atas.</small>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="service">Layanan Pengiriman</label>
+                                        <input type="text" readonly value="{{$order->shipping->service}}" class="form-control">
+                                    </div>
+                                </div>
+                                <p>Dengan mengklik tombol Simpan, berarti Anda sudah mengirim produk dan sudah mendapatkan nomor tracking. Pesanan akan dirubah statusnya menjadi Terkirim.</p>
                                 <button class="btn btn-md btn-primary" @if(!empty($order->shipping->tracking_code)) disabled @endif>Simpan</button>
                             </form>
                         </div>

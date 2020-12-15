@@ -180,7 +180,8 @@
                 showCancelButton: true,
                 focusCancel: true,
                 inputPlaceholder: 'Saya akan membatalkan pesanan ini',
-                confirmButtonText: 'Konfirmasi <i class="fas fa-check"></i>',
+                confirmButtonText: 'Batalkan <i class="fas fa-times"></i>',
+                confirmButtonColor: '#d33',
                 inputValidator: (result) => {
                     return !result && 'Anda harus mengkonfirmasi pembatalan ini'
                 }

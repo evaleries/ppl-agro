@@ -32,7 +32,7 @@ class Order extends Model
     public const STATUS_PENDING = 'PENDING';
     public const STATUS_PROCESSING = 'PROCESSING';
     public const STATUS_COMPLETED = 'COMPLETED';
-    public const STATUS_ON_DELIVERY = 'ON_DELIVERY';
+    public const STATUS_ON_DELIVERY = 'ON DELIVERY';
     public const STATUS_CANCELLED = 'CANCELLED';
 
     /**

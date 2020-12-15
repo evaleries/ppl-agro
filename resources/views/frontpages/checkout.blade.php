@@ -109,9 +109,9 @@
                                     <label>Kurir</label>
                                     <select name="shipping_methods[{{$item->store_id}}]" data-city="{{$item->product->store->city->id}}" data-weight="{{$cart->weightFromStore($item->store_id)}}" class="form-control shipping_methods">
                                         <option value="-1" selected>Pilih</option>
-                                        <option value="jne">JNE</option>
-                                        <option value="pos">POS</option>
-                                        <option value="tiki">TIKI</option>
+                                        <option value="JNE">JNE</option>
+                                        <option value="POS">POS</option>
+                                        <option value="TIKI">TIKI</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -149,12 +149,12 @@
                                             <label for="bank">Nama Bank</label>
                                             <select name="bank" id="bank" class="form-control">
                                                 <option value="-1" selected>Pilih Bank</option>
-                                                <option value="bca" {{old('bank') === 'bca' ? 'selected' : ''}}>BCA</option>
-                                                <option value="bri" {{old('bank') === 'bri' ? 'selected' : ''}}>BRI</option>
-                                                <option value="bni" {{old('bank') === 'bni' ? 'selected' : ''}}>BNI</option>
-                                                <option value="mandiri" {{old('bank') === 'mandiri' ? 'selected' : ''}}>MANDIRI</option>
-                                                <option value="cimb" {{old('bank') === 'cimb' ? 'selected' : ''}}>CIMB NIAGA</option>
-                                                <option value="jatim" {{old('bank') === 'jatim' ? 'selected' : ''}}>Bank JATIM</option>
+                                                <option value="BCA" {{old('bank') === 'BCA' ? 'selected' : ''}}>BCA</option>
+                                                <option value="BRI" {{old('bank') === 'BRI' ? 'selected' : ''}}>BRI</option>
+                                                <option value="BNI" {{old('bank') === 'BNI' ? 'selected' : ''}}>BNI</option>
+                                                <option value="MANDIRI" {{old('bank') === 'MANDIRI' ? 'selected' : ''}}>MANDIRI</option>
+                                                <option value="CIMBNIAGA" {{old('bank') === 'CIMBNIAGA' ? 'selected' : ''}}>CIMB NIAGA</option>
+                                                <option value="BANKJATIM" {{old('bank') === 'BANKJATIM' ? 'selected' : ''}}>Bank JATIM</option>
                                             </select>
                                         </div>
                                     </div>

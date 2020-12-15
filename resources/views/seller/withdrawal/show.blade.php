@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Pencairan Dana')
+@section('title', 'Detail Pencarian Dana #'.$withdrawal->id)
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Detail Pencairan Dana</h1>
+            <h1>Detail Pencairan Dana #{{$withdrawal->id}}</h1>
         </div>
 
         <div class="section-body">

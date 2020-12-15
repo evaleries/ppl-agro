@@ -13,6 +13,7 @@ class WithdrawController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param WithdrawalDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
     public function index(WithdrawalDataTable $dataTable)
@@ -27,17 +28,18 @@ class WithdrawController extends Controller
      */
     public function create()
     {
-        $balance = StoreBalance::available()->sum('amount');
+        $fee = Withdrawal::WITHDRAWAL_FEE;
+        $balance = StoreBalance::available()->sum('amount') - $fee;
 
         if ($balance <= 10000) {
-            return redirect()->back()->withErrors('Anda tidak memiliki saldo yang cukup');
+            return redirect()->back()->withErrors('Anda tidak memiliki saldo yang cukup. Saldo anda sekarang Rp. '. $balance);
         }
 
         if (Withdrawal::pending()->get()->isNotEmpty()) {
-            return redirect()->back()->withErrors('Anda masih memiliki pengajuan pencairan yang berstatus PENDNING');
+            return redirect()->back()->withErrors('Anda masih memiliki pengajuan pencairan yang berstatus PENDING');
         }
 
-        return view('seller.withdrawal.create', compact('balance'));
+        return view('seller.withdrawal.create', compact('balance', 'fee'));
     }
 
     /**
@@ -52,7 +54,7 @@ class WithdrawController extends Controller
         $balance = StoreBalance::available()->sum('amount') - Withdrawal::WITHDRAWAL_FEE;
         $validated = $this->validate($request, [
             'amount' => 'required|numeric|max:'.$balance,
-            'bank' => 'required|string|in:bca,bni,bri,mandiri,danamon',
+            'bank' => 'required|string',
             'account_number' => 'required|numeric',
         ]);
         $validated['status'] = Withdrawal::STATUS_PENDING;
@@ -65,7 +67,7 @@ class WithdrawController extends Controller
 
         Withdrawal::create($validated);
 
-        return redirect()->route('seller.withdrawals.index')->withSuccess('Pencairan dana telah dikirim, saldo telah dikurangi sejumlah yang diajukan');
+        return redirect()->route('seller.withdrawals.index')->withSuccess('Pencairan dana telah dikirim');
     }
 
     /**

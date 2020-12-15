@@ -71,7 +71,7 @@
                     </article> <!-- product-info-aside .// -->
                 </main> <!-- col.// -->
             </div> <!-- row.// -->
-            @if($product->ratings->isNotEmpty())
+            @if($product->ratings->isNotEmpty() || $hasRelatedOrder)
             <div class="row">
                 <div class="col-md-12">
                     <header class="section-heading">
@@ -89,10 +89,36 @@
                         </div>
                     </header>
 
+                    @include('partials.alerts')
+                    @if(!$alreadyRated && $hasRelatedOrder && auth()->check())
+                        <article class="box mb-3">
+                            <div class="icontext w-100">
+                                <div class="text">
+                                    <form action="{{route('product.rate', $product->slug)}}" method="POST">
+                                        @csrf
+                                        <p class="mb-1">oleh <strong>{{auth()->user()->full_name}}</strong></p>
+                                        <div class="form-group my-2">
+                                            <label>Rating</label>
+                                            <select name="rate" id="rate" class="form-control">
+                                                <option value="5" selected>5</option>
+                                                <option value="3">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </div>
+                                        <textarea name="comment" id="comment" rows="3" class="form-control" placeholder="Komentar mengenai produk">{{old('rating')}}</textarea>
+                                        <button class="btn btn-md btn-primary my-2">Kirim Review</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    @endif
+
                     @foreach ($product->ratings->sortByDesc('created_at') as $rating)
                     <article class="box mb-3">
                         <div class="icontext w-100">
-                            <img src="{{ asset('images/avatars/avatar1.jpg') }}" class="img-xs icon rounded-circle">
+                            <i class="fas fa-user-circle fa-3x img-xs icon"></i>
                             <div class="text">
                                 <span class="date text-muted float-md-right">{{ $rating->created_at }} </span>
                                 <h6 class="mb-1">{{$rating->user->full_name}} </h6>
@@ -107,7 +133,7 @@
                                 <span class="label-rating {{ $rating->rate >= 3 ? 'text-warning' : 'text-danger' }}">{{ $rating->rate >= 3 ? 'Good' : 'Bad' }}</span>
                             </div>
                         </div> <!-- icontext.// -->
-                        <div class="mt-3">
+                        <div class="mt-3 mx-2">
                             <p>
                                 {{$rating->comment}}
                             </p>
@@ -117,6 +143,29 @@
 
                 </div> <!-- col.// -->
             </div> <!-- row.// -->
+            @endif
+
+            @if($relatedStoreProducts->isNotEmpty())
+                <div class="row">
+                    <div class="col-12">
+                        <header class="section-heading">
+                            <h3>Produk lainnya dari Toko {{$store->name}}</h3>
+                        </header>
+                        <div class="row">
+                            @foreach($relatedStoreProducts as $product)
+                            <div class="col-md-3">
+                                <figure class="card card-product-grid">
+                                    <div class="img-wrap"> <img src="{{optional($product->images->first())->image_url}}" loading="lazy"> </div>
+                                    <figcaption class="info-wrap border-top">
+                                        <a href="{{route('product.show', [$store->slug, $product->slug])}}" class="title">{{$product->name}}</a>
+                                        <div class="price mt-2">@priceIDR($product->price)</div> <!-- price-wrap.// -->
+                                    </figcaption>
+                                </figure> <!-- card // -->
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
     </section>

@@ -38,6 +38,10 @@ class CheckoutController extends Controller
             return redirect()->route('products');
         }
 
+        if ($this->cart->totalWeight() < 1000) {
+            return redirect()->back()->withErrors('Total berat untuk memesan produk yaitu 1 kg');
+        }
+
         return view('frontpages.checkout', [
             'address' => auth()->user()->addresses()->first(),
             'cart' => $this->cart,
@@ -86,7 +90,7 @@ class CheckoutController extends Controller
                     'description' => $request->get('description'),
                 ]);
 
-                $totalAmount = 0;
+                $totalAmount = 0; $totalPpn = 0;
                 foreach ($cartItems as $item) {
                     OrderItem::create([
                         'order_id' => $order->id,
@@ -101,11 +105,12 @@ class CheckoutController extends Controller
 
                     $totalAmount += $item['product']->price * $item['quantity'];
                 }
+                $totalPpn = $totalAmount * 0.1;
                 $totalAmount += $shippingCost;
 
                 $invoice = Invoice::create([
                     'order_id' => $order->id,
-                    'amount' => $totalAmount,
+                    'amount' => $totalAmount + $totalPpn,
                     'status' => Invoice::STATUS_UNPAID,
                     'due_date' => now()->format('Y-m-d'),
                     'number' => implode('/', ['INV', today()->format('Ymd'), $order->id])
@@ -115,7 +120,7 @@ class CheckoutController extends Controller
                     'invoice_id' => $invoice->id,
                     'method' => $request->get('payment_method'),
                     'status' => Payment::STATUS_PENDING,
-                    'amount' => $totalAmount
+                    'amount' => $totalAmount + $totalPpn
                 ]);
                 if ($request->get('payment_method') === 'bank') {
                     PaymentBank::create([

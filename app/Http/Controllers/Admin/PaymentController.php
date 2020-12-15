@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Models\StoreBalance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -58,6 +59,11 @@ class PaymentController extends Controller
                 $payment->update(['status' => Payment::STATUS_CANCELLED]);
                 $payment->invoice->update(['status' => Invoice::STATUS_UNPAID]);
                 $payment->invoice->order->update(['status' => Order::STATUS_CANCELLED]);
+                $payment->invoice->order->store->balances()
+                    ->where('status', StoreBalance::TYPE_PENDING)
+                    ->where('description', 'like', '%#'.$payment->invoice->order_id.'%')
+                    ->firstOrFail()
+                    ->update(['status' => StoreBalance::TYPE_CANCELLED]);
             }
         } catch (\Exception $exception) {
             DB::rollBack();
