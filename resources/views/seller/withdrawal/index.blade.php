@@ -7,7 +7,7 @@
         <div class="section-body">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>Daftar Pencarian</h4>
+                    <h4>Daftar Pencairan Dana</h4>
                 </div>
                 <div class="card-body">
                     @include('partials.alerts')
