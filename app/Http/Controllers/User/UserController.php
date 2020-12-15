@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use App\DataTables\User\UserOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProposalStoreRequest;
-use App\Models\Community;
 use App\Models\CommunityProposal;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\StoreBalance;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
