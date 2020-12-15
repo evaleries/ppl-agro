@@ -28,6 +28,7 @@ class CartController extends Controller
         }
 
         return view('frontpages.cart', [
+            'cart' => $this->cart,
             'cartItems' => $this->cart->all(),
             'grandTotal' => $this->cart->grandTotal(),
             'ppn' => $this->cart->ppn(),

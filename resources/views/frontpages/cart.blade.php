@@ -16,7 +16,7 @@
             <div class="row">
                 <main class="col-md-9">
                     <div class="card">
-                        @if($cart->totalWeight < 1000)
+                        @if($cart->totalWeight() < 1000)
                         <div class="alert alert-warning">
                             <p>Minimal total berat produk untuk pemesanan yaitu 1 kg</p>
                         </div>
@@ -43,7 +43,8 @@
                                         <div class="aside"><img src="{{optional($item->product->images->first())->image_url}}" class="img-sm rounded mx-auto d-block"></div>
                                         <figcaption class="info">
                                             <a href="{{route('product.show', [$item->product->store->slug, $item->product->slug])}}" class="title text-dark">{{$item->product->name}}</a>
-                                            <p class="text-muted small">Kategori: {{$item->product->category->name}}<br> Toko: {{$item->product->store->name}}</p>
+                                            <p class="text-muted small">Kategori: {{$item->product->category->name}}<br> Toko: {{$item->product->store->name}}
+                                                <br>Berat: {{$item->product->weight .' '. $item->product->weight_unit}}</p>
                                         </figcaption>
                                     </figure>
                                 </td>
