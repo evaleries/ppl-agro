@@ -85,6 +85,8 @@ Route::get('/ajax/provinces', 'AjaxController@provinces')->name('ajax.provinces'
 Route::get('/ajax/cities/{province}', 'AjaxController@cities')->name('ajax.cities');
 Route::post('/ajax/shipping', 'AjaxController@shippingRate')->name('ajax.shipping');
 
+Route::get('/c/{community}', 'HomeController@show')->name('community.show');
+Route::get('/events/{event}', 'HomeController@event')->name('community.event.show');
 Route::get('/category/{category}', 'ProductController@category')->name('category');
 Route::get('/products', 'ProductController@index')->name('products');
 Route::get('/{store}/{product}', 'ProductController@show')->name('product.show');

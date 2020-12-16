@@ -7,6 +7,7 @@
 					<ul class="list-unstyled">
 						<li><a href="#">Tentang Kami</a></li>
 						<li><a href="#">Komunitas</a></li>
+                        <li><a href="{{route('user.community.propose')}}">Ajukan Komunitas Baru</a></li>
 					</ul>
 				</aside>
 				<aside class="col-md col-6">
@@ -15,14 +16,13 @@
                         <li><a href="{{route('user.overview')}}"> Akun Saya </a></li>
                         <li><a href="{{route('user.orders')}}"> Pesanan Saya </a></li>
                         <li><a href="{{route('login')}}"> Login </a></li>
-                        <li><a href="{{route('register')}}"> register </a></li>
+                        <li><a href="{{route('register')}}"> Register </a></li>
 					</ul>
 				</aside>
 				<aside class="col-md">
 					<h6 class="title">Social</h6>
 					<ul class="list-unstyled">
 						<li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
-						<li><a href="#"> <i class="fab fa-twitter"></i> Twitter </a></li>
 						<li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
 						<li><a href="#"> <i class="fab fa-youtube"></i> Youtube </a></li>
 					</ul>

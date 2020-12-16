@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Storage;
  * @property string $description
  * @property string $location
  * @property int $max_attendees
- * @property string $started_at
- * @property string $ended_at
+ * @property Carbon $started_at
+ * @property Carbon $ended_at
  * @property string $created_at
  * @property string $updated_at
  * @property Community $community
@@ -74,5 +74,13 @@ class CommunityEvent extends Model
         return Storage::url($this->attributes['banner']);
     }
 
+    public function getCanJoinAttribute()
+    {
+        if ($this->attributes['ended_at']) {
+            return now()->isBetween($this->started_at, $this->ended_at);
+        }
+
+        return $this->started_at->isBefore(today());
+    }
 
 }

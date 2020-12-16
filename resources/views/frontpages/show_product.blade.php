@@ -32,7 +32,7 @@
                         <ul class="list-check my-4">
                             <li><strong>Stock</strong>: {{$product->stock}} items</li>
                             <li><strong>Toko</strong>: {{$product->store->name}}</li>
-                            <li><strong>Komunitas</strong>: {{$product->store->community->name}}</li>
+                            <li><strong>Komunitas</strong>: <a href="{{route('community.show', $store->community->id)}}">{{$product->store->community->name}}</a></li>
                             <li><strong>Berat</strong>: {{$product->weight}} {{$product->weight_unit}}</li>
                             @if (is_array($product->extra_info))
                             @foreach($product->extra_info as $info => $val)

@@ -33,6 +33,10 @@ class Community extends Model
      */
     protected $fillable = ['is_active', 'name', 'user_id', 'logo', 'description', 'instagram', 'facebook', 'whatsapp', 'founded_at', 'created_at', 'updated_at'];
 
+    public $dates = [
+        'founded_at'
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
