@@ -16,6 +16,7 @@
             <div class="row">
                 <main class="col-md-9">
                     <div class="card">
+                        @include('partials.alerts')
                         @if($cart->totalWeight() < 1000)
                         <div class="alert alert-warning">
                             <p>Minimal total berat produk untuk pemesanan yaitu 1 kg</p>
@@ -218,7 +219,7 @@
                     dataType: 'json'
                 }).then(function (data) {
                     spinner.parents('tr.cart-row').find('td:nth-child(3) div.price-wrap var.price').text(data.total_price)
-                    spinner.val(newQty)
+                    spinner.val(data.qty)
                     subTotal.text(data.subTotal)
                     ppn.text(data.ppn)
                     grandTotal.text(data.grandTotal)

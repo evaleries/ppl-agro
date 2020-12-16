@@ -23,8 +23,17 @@ class CartController extends Controller
     public function index(Request $request)
     {
         if ($request->has('product')) {
-            $this->cart->add(Product::findOrFail($request->get('product')), $request->get('quantity', 1));
-            return redirect()->route('cart');
+            $product = Product::findOrFail($request->get('product'));
+            $quantity = $request->get('quantity', 1);
+
+            if ($product->stock >= ($this->cart->quantityFrom($product) + $quantity)) {
+                $this->cart->add($product, $quantity);
+                return redirect()->route('cart');
+            }
+
+            abort_if($quantity < 1, 400);
+
+            return redirect()->route('cart')->withErrors('Stock produk tidak mencukupi untuk dibeli.');
         }
 
         return view('frontpages.cart', [
@@ -43,9 +52,16 @@ class CartController extends Controller
      */
     public function addItem(Request $request, Product $product)
     {
-        $this->cart->add($product, $request->get('quantity', 1));
+        $quantity = $request->get('quantity', 1);
 
-        return redirect()->route('cart');
+        abort_if($quantity < 1, 400);
+
+        if ($product->stock >= ($this->cart->quantityFrom($product) + $quantity)) {
+            $this->cart->add($product, $quantity);
+            return redirect()->route('cart');
+        }
+
+        return redirect()->route('cart')->withErrors('Stock produk tidak mencukupi untuk dibeli');
     }
 
     /**
@@ -57,7 +73,7 @@ class CartController extends Controller
     {
         $this->validate($request, [
             'product_id' => 'required|numeric|exists:products,id',
-            'quantity' => 'required|numeric'
+            'quantity' => 'required|numeric|min:1'
         ]);
 
         $product = Product::findOrFail($request->get('product_id'));
@@ -69,6 +85,7 @@ class CartController extends Controller
             'grandTotal' => $this->cart->grandTotalAsIDR(),
             'ppn' => $this->cart->ppnAsIDR(),
             'subTotal' => $this->cart->subTotalAsIDR(),
+            'qty' => $this->cart->quantityFrom($product)
         ]);
     }
 

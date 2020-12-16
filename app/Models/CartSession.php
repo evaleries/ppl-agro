@@ -4,7 +4,6 @@
 namespace App\Models;
 
 
-use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
 
@@ -27,6 +26,7 @@ class CartSession
 
     /**
      * @param $session mixed
+     * @return CartSession
      */
     public function from($session)
     {
@@ -99,6 +99,16 @@ class CartSession
         return $this->items->search(function ($item) use ($productId) {
             return $item['product_id'] === $productId;
         });
+    }
+
+    public function quantityFrom(Product $product)
+    {
+        $index = $this->findKey($product->id);
+        if ($index !== null && $index !== false) {
+            return $this->items->get($index)['quantity'] ?? 0;
+        }
+
+        return 0;
     }
 
     public function stores()
