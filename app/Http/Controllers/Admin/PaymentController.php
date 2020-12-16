@@ -58,12 +58,19 @@ class PaymentController extends Controller
             } elseif ($request->action === 'reject') {
                 $payment->update(['status' => Payment::STATUS_CANCELLED]);
                 $payment->invoice->update(['status' => Invoice::STATUS_UNPAID]);
-                $payment->invoice->order->update(['status' => Order::STATUS_CANCELLED]);
                 $payment->invoice->order->store->balances()
                     ->where('status', StoreBalance::TYPE_PENDING)
                     ->where('description', 'like', '%#'.$payment->invoice->order_id.'%')
                     ->firstOrFail()
                     ->update(['status' => StoreBalance::TYPE_CANCELLED]);
+
+                $order = Order::with(['items', 'items.product'])->where('order_id', $payment->invoice->order_id)->firstOrFail();
+                $order->update(['status' => Order::STATUS_CANCELLED]);
+                $order->items->each(function ($item) {
+                       $item->product->update([
+                           'stock' => $item->product->stock + $item->quantity
+                       ]);
+                });
             }
         } catch (\Exception $exception) {
             DB::rollBack();
