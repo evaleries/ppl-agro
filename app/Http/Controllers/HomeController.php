@@ -24,8 +24,8 @@ class HomeController extends Controller
     {
         return view('frontpages.community.show', [
             'community' => $community,
-            'events' => CommunityEvent::where('community_id', $community->id)->latest()->paginate(5, ['*'], 'event'),
-            'products' => Product::with('store')->where('store_id', $community->store->id)->latest()->paginate(10, ['*'], 'product'),
+            'events' => CommunityEvent::where('community_id', $community->id)->latest()->paginate(5, ['*'], 'events'),
+            'products' => Product::with('store')->where('store_id', $community->store->id)->latest()->paginate(10, ['*'], 'products'),
         ]);
     }
 

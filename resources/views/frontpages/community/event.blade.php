@@ -27,6 +27,7 @@
                         <img src="{{$event->banner_url}}" class="img-fluid d-block mx-auto" alt="{{$event->name}}">
                     </div>
                     <hr>
+                    <h2 class="my-2">{{$event->name}}</h2>
                     <div class="d-block">
                         {!! $event->description !!}
                     </div>

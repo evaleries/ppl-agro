@@ -48,7 +48,11 @@
                                     </figure> <!-- card // -->
                                 </div> <!-- col.// -->
                                 @endforeach
-                                {{$products->appends(request()->input())->links()}}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{$products->appends(request()->input())->links()}}
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
@@ -74,7 +78,6 @@
                                                     Dimulai: {{$event->started_at->format('d M Y H:i A')}} @if($event->ended_at) <br> Diakhiri: {{$event->ended_at->format('d M Y H:i A')}} @endif
                                                 </span>
                                             </div>
-
                                             <br>
                                             <p>
                                                 <a href="{{route('community.event.show', $event->id)}}" class="btn btn-light"> Lihat <i class="fa fa-external-link"></i>  </a>
@@ -85,6 +88,12 @@
                                 </div> <!-- card-body .// -->
                             </article>
                             @endforeach
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{$events->appends(request()->input())->links()}}
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="card card-info">
@@ -118,21 +127,21 @@
 @push('javascript')
     <script>
         $(function() {
-            $("#tabs").find("li a").last().click();
-            let url = document.URL;
-            let hash = url.substring(url.indexOf('#'));
+            let hash = window.location.hash;
+
+            if (hash == '' && window.location.search == '') {
+                $('a[aria-controls=products]').click();
+            }
 
             $("#tabs").find("li a").each(function(key, val) {
-                if (hash == $(val).attr('href')) {
+                if (window.location.search.indexOf($(val).attr('href').replace('#', '')) != -1) {
                     $(val).click();
-                } else if ($(val).hasClass('active')) {
-                    $(val).removeClass('active')
+                    return;
                 }
-                $(val).click(function(ky, vl) {
-                    console.log($(this).attr('href'));
-                    location.hash = $(this).attr('href');
-                });
 
+                if (hash != -1 && hash == $(val).attr('href')) {
+                    $(val).click();
+                }
             });
         });
     </script>
