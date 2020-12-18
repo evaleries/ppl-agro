@@ -8,8 +8,8 @@
     <section class="section-intro padding-y-sm">
         <div class="container">
 
-            <div class="intro-banner-wrap">
-                <img src="{{ asset('images/banners/1.jpg') }}" class="img-fluid rounded">
+            <div class="intro-banner-wrap" style="height: 300px; overflow: hidden;">
+                <img src="{{ asset('images/banners/1.jpg') }}" class="img-fluid rounded w-100 h-100" style="object-fit: cover">
             </div>
 
         </div> <!-- container //  -->
@@ -26,8 +26,8 @@
                         <figure class="item-feature">
                             <span class="text-primary"><i class="fa fa-2x fa-truck"></i></span>
                             <figcaption class="pt-3">
-                                <h5 class="title">Fast delivery</h5>
-                                <p>Pengiriman antar kota sangat cepat! </p>
+                                <h5 class="title">Pengiriman Produk Cepat</h5>
+                                <p>Pengiriman produk antar kota di Indonesia sangatlah cepat</p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
                     </div><!-- col // -->
@@ -36,7 +36,7 @@
                             <span class="text-primary"><i class="fa fa-2x fa-landmark"></i></span>
                             <figcaption class="pt-3">
                                 <h5 class="title">Kualitas Terjaga</h5>
-                                <p>Kualitas biji kopi diseleksi secara ketat sehingga membuat cita rasa kopi yang nikmat.</p>
+                                <p>Kualitas biji kopi langsung diambil dari komunitas-komunitas pencinta di Indonesia.</p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
                     </div><!-- col // -->
@@ -44,7 +44,7 @@
                         <figure  class="item-feature">
                             <span class="text-primary"><i class="fa fa-2x fa-lock"></i></span>
                             <figcaption class="pt-3">
-                                <h5 class="title">High secured </h5>
+                                <h5 class="title">Pembayaran Aman </h5>
                                 <p>Transaksi pada J.Coffee sangatlah aman dan cepat</p>
                             </figcaption>
                         </figure> <!-- iconbox // -->
@@ -56,13 +56,12 @@
     </section>
     <!-- ========================= SECTION FEATURE END// ========================= -->
 
-
     <!-- ========================= SECTION CONTENT ========================= -->
     <section class="section-content">
         <div class="container">
 
             <header class="section-heading">
-                <h3 class="section-title">Latest products</h3>
+                <h3 class="section-title">Produk Terbaru</h3>
             </header><!-- sect-heading -->
 
             <div class="row">
