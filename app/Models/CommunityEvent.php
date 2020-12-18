@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string $created_at
  * @property string $updated_at
  * @property Community $community
- * @property CommunityEventAttendee[] $communityEventAttendees
+ * @property CommunityEventAttendee[] $attendees
  */
 class CommunityEvent extends Model
 {
@@ -76,6 +76,10 @@ class CommunityEvent extends Model
 
     public function getCanJoinAttribute()
     {
+        if ($this->started_at->isFuture()) {
+            return true;
+        }
+
         if ($this->attributes['ended_at']) {
             return now()->isBetween($this->started_at, $this->ended_at);
         }
