@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('checkout/process', 'CheckoutController@process')->name('checkout.process');
     Route::get('checkout/success', 'CheckoutController@success')->name('checkout.success');
     Route::post('/rate/{product}', 'ProductController@rate')->name('product.rate');
+    Route::post('events/{event}/register', 'HomeController@registerEvent')->name('community.event.register');
 });
 
 Route::get('/ajax/provinces', 'AjaxController@provinces')->name('ajax.provinces');
