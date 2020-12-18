@@ -108,7 +108,7 @@
         </div>
     </section>
 
-    <form action="{{route('admin.communities.destroy', $community->id)}}" id="formDeleteCommunity">
+    <form action="{{route('admin.communities.destroy', $community->id)}}" method="POST" id="formDeleteCommunity">
         @csrf
         @method('DELETE')
     </form>
