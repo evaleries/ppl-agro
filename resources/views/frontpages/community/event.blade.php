@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('title', $event->community->name)
+@section('title', $event->name)
 
 @section('header')
     <section class="section-pagetop bg">
@@ -33,8 +33,12 @@
                     </div>
 
                     <div class="d-block mt-5 mb-0">
-                        @if($event->can_join)
-                            <button class="btn btn-md btn-success">Daftar Event</button>
+                        @if(auth()->check() && $event->can_join)
+                            @include('partials.alerts')
+                            <form action="{{route('community.event.register', $event->id)}}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-md btn-success">Daftar Event</button>
+                            </form>
                             <br>
                             <small class="text-muted">Dengan mendaftar event, Anda otomatis akan tergabung ke dalam komunitas <strong>{{$event->community->name}}</strong></small>
                         @endif
