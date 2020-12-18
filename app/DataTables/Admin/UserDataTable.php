@@ -21,6 +21,9 @@ class UserDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('roles', function ($user) {
+                return implode(', ', $user->roles()->pluck('name')->toArray());
+            })
             ->addColumn('action', 'admin.user.action');
     }
 
@@ -74,7 +77,7 @@ class UserDataTable extends DataTable
             Column::make('last_name')->hidden()->exportable(false),
             Column::make('full_name')->orderable(false)->searchable(false),
             Column::make('email'),
-            Column::make('role')->orderable(false)->searchable(false),
+            Column::computed('roles')->orderable(false)->searchable(false),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];

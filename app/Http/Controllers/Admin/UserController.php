@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\Admin\UserDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UserStoreRequest;
-use App\Http\Requests\Users\UserUpdateRequest;
+use App\Http\Requests\Admin\Users\UserStoreRequest;
+use App\Http\Requests\Admin\Users\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
