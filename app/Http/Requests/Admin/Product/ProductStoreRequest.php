@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ProductStoreRequest extends FormRequest
