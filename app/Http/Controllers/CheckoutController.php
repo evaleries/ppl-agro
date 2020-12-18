@@ -73,7 +73,7 @@ class CheckoutController extends Controller
                     $store->city->id,
                     $request->get('shipping_city_id'),
                     $weightFromStore,
-                    $request->shipping_methods[$storeId] ?? '-',
+                    strtolower($request->shipping_methods[$storeId]) ?? '-',
                     $request->shipping_services[$storeId] ?? '-');
 
                 $shippingCost = $shippingService->cost[0]->value ?? 0;

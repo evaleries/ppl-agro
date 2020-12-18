@@ -37,10 +37,10 @@ class AjaxController extends Controller
             'origin' => 'required|numeric',
             'destination' => 'required|numeric',
             'weight' => 'required|numeric|min:1',
-            'courier' => 'required|string|in:jne,tiki,pos'
+            'courier' => 'required|string|in:JNE,TIKI,POS'
         ]);
 
-        $results = $ongkir->costs($request->origin, $request->destination, $request->weight, $request->courier);
+        $results = $ongkir->costs($request->origin, $request->destination, $request->weight, strtolower($request->courier));
 
         return response()->json(['status' => $ongkir->getStatusCode() === 200 ? 'OK' : 'ERROR', 'results' => $results], $ongkir->getStatusCode());
     }
