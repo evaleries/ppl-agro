@@ -22,9 +22,6 @@ class ProductDataTable extends DataTable
             ->addColumn('price', function ($product) {
                 return 'Rp. '. number_format($product->price, 0, ',','.');
             })
-            ->addColumn('category', function ($product) {
-                return $product->category->name;
-            })
             ->addColumn('action', function ($product) {
                 return '<a href="'. route('admin.products.show', $product->id). '" class="btn btn-md btn-outline-primary" title="Detail '. $product->name .'"><i class="fa fa-eye"></i></a>';
             });
@@ -79,9 +76,9 @@ class ProductDataTable extends DataTable
             Column::make('name'),
             Column::computed('price'),
             Column::make('stock'),
-            Column::computed('category'),
-            Column::make('store')->data('store.name'),
-            Column::make('community')->data('store.community.name'),
+            Column::make('category')->data('category.name')->orderable(false)->searchable(false),
+            Column::make('store')->data('store.name')->searchable(false),
+            Column::make('community')->data('store.community.name')->orderable(false)->searchable(false),
             Column::make('created_at')->hidden(),
             Column::make('updated_at')->hidden(),
         ];
