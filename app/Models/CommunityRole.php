@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $id
  * @property integer $parent_id
  * @property string $name
- * @property string $created_at
- * @property string $updated_at
  * @property CommunityRole $role
  */
 class CommunityRole extends Model
@@ -24,7 +22,7 @@ class CommunityRole extends Model
     /**
      * @var array
      */
-    protected $fillable = ['parent_id', 'name', 'created_at', 'updated_at'];
+    protected $fillable = ['parent_id', 'name'];
 
     public $timestamps = false;
 
