@@ -94,4 +94,30 @@
         </div> <!-- container .//  -->
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="section-content mb-3">
+        <div class="container">
+
+            <header class="section-heading">
+                <h3 class="section-title">Event Terbaru</h3>
+            </header><!-- sect-heading -->
+
+            <div class="row">
+                @foreach($latest_events as $event)
+                    <div class="col-md-3">
+                        <div class="card card-product-grid">
+                            <a href="{{ route('community.event.show', $event->id) }}" class="img-wrap"> <img src="{{ $event->banner_url }}" loading="lazy"> </a>
+                            <figcaption class="info-wrap">
+                                <a href="{{ route('community.event.show', $event->id) }}" class="title">{{ $event->name }}</a>
+                                <div class="price mt-1">{{$event->location}}</div> <!-- price-wrap.// -->
+                            </figcaption>
+                        </div>
+                    </div> <!-- col.// -->
+                @endforeach
+            </div> <!-- row.// -->
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
 @endsection
