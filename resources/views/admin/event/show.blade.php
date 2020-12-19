@@ -84,7 +84,7 @@
                     <div class="collapse show" id="banner_img">
                         <div class="card-body">
                             <div class="text-center">
-                                <img src="{{$event->banner_url}}" alt="{{$event->name}}'s banner" class="img-responsive">
+                                <img src="{{$event->banner_url}}" alt="{{$event->name}}'s banner" class="img-fluid">
                             </div>
                         </div>
                     </div>
