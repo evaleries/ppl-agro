@@ -37,7 +37,9 @@
                             </div>
                             <div class="wizard-step-label">
                                 Pesanan Terkirim <br>
+                                @if ($order->status === \App\Models\Order::STATUS_ON_DELIVERY || $order->shipping->status === \App\Models\Shipping::STATUS_SHIPPED)
                                 <small>{{$order->shipping->updated_at}}</small>
+                                @endif
                             </div>
                         </div>
                         <div class="wizard-step {{$order->status === \App\Models\Order::STATUS_COMPLETED ? 'wizard-step-success' : ''}}">
