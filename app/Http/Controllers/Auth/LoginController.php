@@ -37,7 +37,7 @@ class LoginController extends Controller
             return route('admin.dashboard');
         }
 
-        if (auth()->user()->role === 'seller') {
+        if (auth()->user()->hasAnyRole('seller')) {
             return route('seller.dashboard');
         }
 
