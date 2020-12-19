@@ -68,6 +68,7 @@
                     </div>
                 </div>
             </div>
+            @if($balance_histories->isNotEmpty())
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="card card-statistic-2">
                     <div class="card-chart">
@@ -86,6 +87,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
         @if($community->is_active === 0)
         <div class="row">
