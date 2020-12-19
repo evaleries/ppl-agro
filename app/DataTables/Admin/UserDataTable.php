@@ -22,7 +22,7 @@ class UserDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('roles', function ($user) {
-                return implode(', ', $user->roles()->pluck('name')->toArray());
+                return $user->roles()->pluck('name')->implode(', ');
             })
             ->addColumn('action', 'admin.user.action');
     }
