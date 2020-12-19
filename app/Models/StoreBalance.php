@@ -63,6 +63,10 @@ class StoreBalance extends Model
 
     public function scopeAvailable($q)
     {
-        return $q->where('store_id', auth()->user()->community->store->id)->where('type', self::TYPE_COMPLETED)->orWhere('type', self::TYPE_WITHDRAW);
+        return $q->where('store_id', auth()->user()->community->store->id)
+            ->where(function ($query) {
+               $query->where('type', self::TYPE_COMPLETED)
+                   ->orWhere('type', self::TYPE_WITHDRAW);
+            });
     }
 }

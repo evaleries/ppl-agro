@@ -106,8 +106,11 @@ class Store extends Model
     public function getBalanceAttribute()
     {
         return $this->balances()
-            ->where('store_balances.type', StoreBalance::TYPE_COMPLETED)
-            ->orWhere('store_balances.type', StoreBalance::TYPE_WITHDRAW)->sum('amount');
+            ->where(function ($query) {
+                $query->orWhere('store_balances.type', StoreBalance::TYPE_COMPLETED)
+                    ->orWhere('store_balances.type', StoreBalance::TYPE_WITHDRAW);
+            })
+            ->sum('amount');
     }
 
     public function getImageUrlAttribute()
