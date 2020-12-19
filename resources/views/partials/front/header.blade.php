@@ -37,7 +37,7 @@ if (auth()->user()) {
                             <a href="{{route('cart')}}" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
                         </div>
                         <div class="widget-header icontext">
-                            <a href="{{ $dashboardRoute }}" class="icon icon-sm rounded-circle border"><i class="fa fa-fire"></i></a>
+                            <a href="{{ $dashboardRoute }}" class="icon icon-sm rounded-circle border"><i class="fa fa-home"></i></a>
                             <div class="text">
                                 <span class="text-muted">Welcome!</span>
                                 <div>
