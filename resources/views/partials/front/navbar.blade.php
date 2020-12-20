@@ -10,11 +10,10 @@
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link pl-0" data-toggle="dropdown" href="#"><strong> <i class="fa fa-bars"></i> &nbsp
-                            All category</strong></a>
+                            Menu</strong></a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{route('home')}}">Home</a>
-                        <a class="dropdown-item" href="#">Communities</a>
-                        <a class="dropdown-item" href="#">About Us</a>
+                        <a class="dropdown-item" href="{{route('about_us')}}">Tentang Kami</a>
                         <div class="dropdown-divider"></div>
                         @foreach(\App\Models\ProductCategory::all() as $category)
                             <a href="{{route('products', ['category' => $category->id])}}" class="dropdown-item">{{$category->name}}</a>
