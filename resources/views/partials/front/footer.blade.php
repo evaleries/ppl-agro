@@ -5,8 +5,7 @@
 				<aside class="col-md col-6">
 					<h6 class="title">{{config('app.name')}}</h6>
 					<ul class="list-unstyled">
-						<li><a href="#">Tentang Kami</a></li>
-						<li><a href="#">Komunitas</a></li>
+						<li><a href="{{route('about_us')}}">Tentang Kami</a></li>
                         <li><a href="{{route('user.community.propose')}}">Ajukan Komunitas Baru</a></li>
 					</ul>
 				</aside>
