@@ -41,6 +41,9 @@ class EventStoreRequest extends FormRequest
      */
     public function validationData()
     {
+        if ($this->request->get('max_attendees') === null) {
+            $this->request->set('max_attendees', 10000);
+        }
         $this->request->set('community_id', auth()->user()->community->id);
         return $this->all();
     }

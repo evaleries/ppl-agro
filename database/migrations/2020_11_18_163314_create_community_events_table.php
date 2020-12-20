@@ -20,7 +20,7 @@ class CreateCommunityEventsTable extends Migration
             $table->string('banner');
             $table->text('description')->nullable();
             $table->string('location')->nullable();
-            $table->integer('max_attendees')->default(10000);
+            $table->integer('max_attendees')->nullable()->default(10000);
             $table->datetime('started_at');
             $table->datetime('ended_at');
             $table->timestamps();
