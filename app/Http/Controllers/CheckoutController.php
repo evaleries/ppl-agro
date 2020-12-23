@@ -39,7 +39,11 @@ class CheckoutController extends Controller
         }
 
         if ($this->cart->totalWeight() < 1000) {
-            return redirect()->back()->withErrors('Total berat untuk memesan produk yaitu 1 kg');
+            return redirect()->route('cart')->withErrors('Total berat untuk memesan produk yaitu 1 kg');
+        }
+
+        if ($this->cart->hasOwnedProduct()) {
+            return redirect()->route('cart')->withErrors('Anda sebagai seller tidak dapat membeli produk Anda sendiri.');
         }
 
         return view('frontpages.checkout', [
@@ -62,6 +66,18 @@ class CheckoutController extends Controller
     {
         if (!session()->has('checkout_session')) {
             session()->put('checkout_session', uniqid('CHECKOUT_'.auth()->user()->id, true));
+        }
+
+        if ($this->cart->items()->isEmpty()) {
+            return redirect()->route('products');
+        }
+
+        if ($this->cart->totalWeight() < 1000) {
+            return redirect()->route('cart')->withErrors('Total berat untuk memesan produk yaitu 1 kg');
+        }
+
+        if ($this->cart->hasOwnedProduct()) {
+            return redirect()->route('cart')->withErrors('Anda sebagai seller tidak dapat membeli produk Anda sendiri.');
         }
 
         DB::beginTransaction();

@@ -228,6 +228,21 @@ class CartSession
         return $totalWeight.' gram';
     }
 
+    public function hasOwnedProduct()
+    {
+        if (! auth()->check()) {
+            return false;
+        }
+
+        if (auth()->user()->hasAnyRole('seller')) {
+            return $this->items->search(function ($item) {
+                return $item['store_id'] === auth()->user()->community->store->id;
+            }) !== false;
+        }
+
+        return false;
+    }
+
     public function clear()
     {
         $this->items = collect([]);
