@@ -13,7 +13,7 @@
                                 <a href="#"><img id="mainImage" class="rounded mx-auto d-block" src="{{$product->images->first()->image_url}}"></a>
                             </div> <!-- img-big-wrap.// -->
                             <div class="thumbs-wrap">
-                                @foreach ($product->images->skip(1) as $image)
+                                @foreach ($product->images as $image)
                                     <a class="item-thumb"> <img loading="lazy" class="img-child" src="{{ $image->image_url }}" alt="{{$product->name}}'s image"></a>
                                 @endforeach
                             </div> <!-- thumbs-wrap.// -->

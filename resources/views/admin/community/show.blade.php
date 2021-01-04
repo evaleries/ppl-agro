@@ -87,7 +87,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="{{ route('admin.users.show', $member->user->id) }}">{{ $member->user->full_name }}</a></td>
-                                        <td>{{ $member->role->name }}</td>
+                                        <td>{{ optional($member->role)->name }}</td>
                                         <td>{{ $member->joined_at }}</td>
                                         <td>
                                             <button class="btn btn-md btn-warning btn-edit" data-id="{{ $member->id }}">
