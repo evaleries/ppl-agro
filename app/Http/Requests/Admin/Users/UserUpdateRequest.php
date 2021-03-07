@@ -43,7 +43,7 @@ class UserUpdateRequest extends FormRequest
 
         $validated['password'] = Hash::make($this->request->get('password'));
 
-        return parent::validated();
+        return $validated;
     }
 
 }
